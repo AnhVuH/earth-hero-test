@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trang cá nhân</title>
+  </head>
+  <body>
+    <h2>{{user.username}}</h2>
+    <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
+  
+    <h3>Danh sách nhiệm vụ đã hoàn thành</h3>
+    {% for i in range(0,mission_number)%}
+      <p>Tên nhiệm vụ: {{(user.missions[i]).missions_name}}</p>
+      <p>Ảnh nhiệm vụ: {{user.missions_done[i]}}</p>
+      <p>Caption:{{user.captions[i]}} </p>
+      <br>
+      <hr>
+    {% endfor%}
+  </body>
+</html>
