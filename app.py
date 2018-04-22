@@ -1,6 +1,10 @@
 from flask import *
 import mlab
 from random import choice
+import base64
+import os
+import gmail
+from  werkzeug.utils import secure_filename
 from models.classes import *
 mlab.connect()
 app = Flask(__name__)
@@ -13,45 +17,39 @@ app.secret_key = 'a-useless-key'
 
 @app.route('/')
 def index():
-    return "index"
+    if "user_id" in session:
+        loged_in = True
+    else:
+        loged_in = False
+    return render_template("index.html", loged_in= loged_in)
 
 @app.route("/sign_up", methods= ['GET', 'POST'])
 def sign_up():
     if request.method == 'GET':
-        if "user_id" not in session:
-            return render_template('sign_up.html')
-        else:
-            return "multi login"
+        return render_template('sign_up.html')
     elif request.method == 'POST':
         form = request.form
         email = form['email']
         username = form['username']
         password = form['password']
-        all_missions = list(Missions.objects())
-        missions=[]
-        for i in range(7):
-            mission = choice(all_missions)
-            missions.append(mission)
-        new_user = User(email = email, username = username, password = password, missions= missions)
+        new_user = User(email = email, username = username, password = password)
         new_user.save()
         session['user_id'] = str(new_user.id)
+        missions = Missions.objects()
+        for i in range(0,7):
+            mission= choice(missions)
+            new_user_mission = UserMission(user =new_user.id, mission =mission,completed= False)
+            new_user_mission.save()
         return redirect(url_for("user_profile"))
-
 
 @app.route('/login', methods =['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        if 'user_id' not in session:
-            return render_template('login.html')
-        else:
-            # return render_template('error.html',error_code = "error_multi_login")
-            # return redirect(url_for('index', loged_in = "loged_in"))
-            return "multi login"
+        return render_template('login.html')
     elif request.method =='POST':
         form = request.form
         username = form['username']
         password = form['password']
-        # If can not get a match object, a exception raise => exception handling
         try:
             user = User.objects.get(username__exact = username, password__exact= password)
         except:
@@ -65,59 +63,68 @@ def login():
 
 @app.route("/user_profile")
 def user_profile():
-    user = User.objects.with_id(session['user_id'])
-    mission_number = len(user.missions_done)
-    session['mission_number'] = mission_number
-    return render_template("user_profile.html", user= user, mission_number = session['mission_number'])
+    missions_completed = UserMission.objects(user = session['user_id'],completed= True)
+    username = (User.objects.with_id(session['user_id'])).username
+    return render_template("user_profile.html", missions_completed = missions_completed, username = username)
 
 @app.route("/mission_detail")
 def mission_detail():
-    user = User.objects.with_id(session['user_id'])
-    if session['mission_number'] < 7:
-        detail = user.missions[session['mission_number']]
-        return render_template("mission_detail.html",detail= detail, mission_number = session['mission_number'])
+    mission_detail = (UserMission.objects(user = session['user_id'],completed= False)).first()
+    if mission_detail != None:
+        return render_template("mission_detail.html",mission_detail = mission_detail)
     else:
         return redirect(url_for("congratulation"))
 
+ALLOWED_EXTENSIONS = set(['txt', 'jpg','png', 'jpeg', 'gif', 'pdf' ])
+def allowed_filed(filename):
+    check_1 = "." in filename
+    check_2 = filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    return check_1 and check_2
 
 @app.route("/finish",methods= ['GET', 'POST'])
 def finish():
-    user = User.objects.with_id(session['user_id'])
     if request.method == 'GET':
-        if session['mission_number'] == len(user.missions_done):
-            return render_template('finish.html')
-        else:
-            return "can not upload 2 images"
+        return render_template('finish.html')
     elif request.method == 'POST':
         form = request.form
         caption = form['caption']
-        image = form['image']
 
-        list_missions_done = user.missions_done
-        list_missions_done.append(image)
+        image = request.files['image']
+        image_name = image.filename
+        image_bytes = base64.b64encode(image.read())
+        image_string = image_bytes.decode()
 
-        list_captions = user.captions
-        list_captions.append(caption)
+        if image  and allowed_filed(image_name):
+            mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
+            mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
+            return redirect(url_for("share",id = str(mission_updated.id)))
 
-        user.update(set__missions_done= list_missions_done, set__captions=list_captions)
-        #gửi mail:
-        if session['mission_number'] <= 7:
-            return redirect(url_for("user_profile"))
-        else:
-            return redirect(url_for("congratulation"))
+@app.route("/share/<id>")
+def share(id):
+    mission_share = UserMission.objects.with_id(id)
+    username = mission_share.user.username
+    caption = mission_share.caption
+    image = mission_share.image
+    return render_template("share.html",username = username, caption = caption, image = image, id= id)
 
 @app.route('/congratulation')
 def congratulation():
-    return render_template("congratulation.html", number_mission = session['mission_number'])
+    return render_template("congratulation.html")
 
 @app.route('/logout')
 def logout():
     if 'user_id' in session:
         del session['user_id']
-        return 'logout'
+        return redirect(url_for("index"))
 
-
-
+@app.route('/continue_challenge')
+def continue_challenge():
+    missions = Missions.objects()
+    for i in range(0,7):
+        mission= choice(missions)
+        new_user_mission = UserMission(user =session['user_id'], mission =mission,completed= False)
+        new_user_mission.save()
+    return redirect(url_for("user_profile"))
 
 if __name__ == '__main__':
   app.run(debug=True)

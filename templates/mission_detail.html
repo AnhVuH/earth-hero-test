@@ -5,12 +5,11 @@
     <title>Chi tiết nhiệm vụ</title>
   </head>
   <body>
-    <h1>Bạn đang thực hiện nhiệm vụ thứ {{mission_number}}</h1>
     <h2>Tên nhiệm vụ là</h2>
-    {{detail.missions_name}}
+    {{mission_detail.mission.mission_name}}
     <br>
     <h2>Mô tả nhiệm vụ</h2>
-    {{detail.description}}
+    {{mission_detail.mission.description}}
     <br>
     <a href="{{url_for("finish")}}">Hoàn thành nhiệm vụ</a>
 

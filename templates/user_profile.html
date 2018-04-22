@@ -5,14 +5,17 @@
     <title>Trang cá nhân</title>
   </head>
   <body>
-    <h2>{{user.username}}</h2>
+    <h2>{{username}}</h2>
+    <a href="{{url_for("logout")}}">Đăng xuất</a>
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
-  
+
     <h3>Danh sách nhiệm vụ đã hoàn thành</h3>
-    {% for i in range(0,mission_number)%}
-      <p>Tên nhiệm vụ: {{(user.missions[i]).missions_name}}</p>
-      <p>Ảnh nhiệm vụ: {{user.missions_done[i]}}</p>
-      <p>Caption:{{user.captions[i]}} </p>
+    {% for mission_completed in missions_completed %}
+      <p>Tên nhiệm vụ: {{mission_completed.mission.mission_name}}</p>
+      <p>Ảnh nhiệm vụ: </p>
+      <img src="data:image/jpg;base64,{{mission_completed.image}}" alt="not found">
+
+      <p>Caption:{mission_completed.caption}} </p>
       <br>
       <hr>
     {% endfor%}

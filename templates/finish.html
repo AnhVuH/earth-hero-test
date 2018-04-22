@@ -3,16 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+
   </head>
   <body>
-    <form  method="post">
+    <h1>Uploads files</h1>
+    <h2>Mission number ({{n}})</h2>
+    <form  method="post" enctype="multipart/form-data">
       <label>Caption</label>
       <input type="text" name="caption" value="">
-      <label>Image</label>
-      <input type="text" name="image" value="">
-      <input type="submit" name="" value="">
+      <label>Your picture</label>
+      <input type="file" name="image" value="">
+      <input type="submit" value="Mission completed">
+
 
     </form>
+
 
   </body>
 </html>
