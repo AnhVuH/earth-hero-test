@@ -137,7 +137,7 @@ def continue_challenge():
         mission= choice(missions)
         new_user_mission = UserMission(user =user, mission =mission)
         new_user_mission.save()
-    return redirect(url_for("user_profile"))
+    return "continue challenge"
 
 @app.route("/save_album/<int:save>")
 def save_album(save):
@@ -151,6 +151,8 @@ def save_album(save):
     user = User.objects.with_id(session['user_id'])
     new_album = Library(user = user,user_missions = save_missions)
     new_album.save()
+    save_missions.update(set__saved=True)
+    return "your album saved"
 
 @app.route('/library')
 def library():
