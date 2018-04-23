@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Thư viện các nhiệm vụ đã hoàn thành</title>
+  </head>
+  <body>
+    {% for album in all_albums %}
+      {{album.user.username}}
+      {% for item in album.user_missions %}
+        <p>{{item.mission.mission_name}}</p>
+        <br>
+        <img src="data:image/jpg;base64,{{item.image}}" alt="not found">
+        <br>
+        <p>{{item.caption}}</p>
+      {% endfor%}
+    {% endfor %}
+  </body>
+</html>

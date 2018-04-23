@@ -45,7 +45,7 @@ def sign_up():
         missions = Missions.objects()
         for i in range(0,7):
             mission= choice(missions)
-            new_user_mission = UserMission(user =new_user.id, mission =mission,completed= False)
+            new_user_mission = UserMission(user = new_user, mission = mission)
             new_user_mission.save()
         return redirect(url_for("user_profile"))
 
@@ -57,10 +57,8 @@ def login():
         form = request.form
         username = form['username']
         password = form['password']
-        try:
-            user = User.objects.get(username__exact = username, password__exact= password)
-        except:
-            user = None
+
+        user = User.objects(username__exact = username, password__exact= password).first()
         if user is not None:
             user = User.objects.get(username__exact = username, password__exact= password)
             session["user_id"] = str(user.id)
@@ -70,8 +68,8 @@ def login():
 
 @app.route("/user_profile")
 def user_profile():
-    missions_completed = UserMission.objects(user = session['user_id'],completed= True)
-    num_missions_uncompleted = list(UserMission.objects(user = session['user_id'],completed= False)).count()
+    missions_completed = UserMission.objects(user= session['user_id'],completed= True)
+    num_missions_uncompleted = len(list(UserMission.objects(user = session['user_id'],completed= False)))
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed, username = username,num_missions_uncompleted = num_missions_uncompleted)
 
@@ -79,6 +77,7 @@ def user_profile():
 def mission_detail():
     mission_detail = (UserMission.objects(user = session['user_id'],completed= False)).first()
     if mission_detail != None:
+        session['done'] = False
         return render_template("mission_detail.html",mission_detail = mission_detail)
     else:
         return redirect(url_for("congratulation"))
@@ -89,10 +88,14 @@ def allowed_filed(filename):
     check_2 = filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
     return check_1 and check_2
 
+
 @app.route("/finish",methods= ['GET', 'POST'])
 def finish():
     if request.method == 'GET':
-        return render_template('finish.html')
+        if not session['done']:
+            return render_template('finish.html')
+        else:
+            return "your image uploaded!!!"
     elif request.method == 'POST':
         form = request.form
         caption = form['caption']
@@ -105,6 +108,7 @@ def finish():
         if image  and allowed_filed(image_name):
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
+            session['done'] = True
             return redirect(url_for("share",id = str(mission_updated.id)))
 
 @app.route("/share/<id>")
@@ -128,11 +132,31 @@ def logout():
 @app.route('/continue_challenge')
 def continue_challenge():
     missions = Missions.objects()
+    user = User.objects.with_id(session['user_id'])
     for i in range(0,7):
         mission= choice(missions)
-        new_user_mission = UserMission(user =session['user_id'], mission =mission,completed= False)
+        new_user_mission = UserMission(user =user, mission =mission)
         new_user_mission.save()
     return redirect(url_for("user_profile"))
+
+@app.route("/save_album/<int:save>")
+def save_album(save):
+    unsave_missions = UserMission.objects(user =session['user_id'],completed = True, saved = False)
+    if save == 0:
+        unsave_missions.update(set__not_save= True)
+    elif save == 1:
+        unsave_missions.update(set__not_save= False)
+    save_missions = UserMission.objects(user =session['user_id'],completed = True, saved = False, not_save = False)
+
+    user = User.objects.with_id(session['user_id'])
+    new_album = Library(user = user,user_missions = save_missions)
+    new_album.save()
+
+@app.route('/library')
+def library():
+    all_albums = Library.objects()
+    return render_template("library.html", all_albums= all_albums)
+
 
 if __name__ == '__main__':
   app.run(debug=True)

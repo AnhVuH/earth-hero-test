@@ -9,6 +9,8 @@
     {% if not loged_in %}
       <a href = "{{url_for('login')}}">log in</a>
       <a href = "{{url_for('sign_up')}}">sign up</a>
+    {%else%}
+      <a href="{{url_for('user_profile')}}">Trang cá nhân</a>
     {% endif %}
     <iframe src="https://www.youtube.com/embed/{{youtubeid}}"
         width="100%"

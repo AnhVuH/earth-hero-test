@@ -10,15 +10,19 @@
     {% if num_missions_uncompleted > 0 %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
     {% else %}
-    <a href="{{url_for("")}}">Lưu lại 7 nhiệm vụ đã thực hiện</a>
+    <a href="{{url_for("save_album",save = 1)}}">Lưu lại 7 nhiệm vụ đã thực hiện vào thư viện chung</a>
+    <a href="{{url_for("save_album",save = 0)}}">Không lưu 7 nhiệm vụ đã thực hiện vào thư viện chung</a>
+    {% endif %}
 
     <h3>Danh sách nhiệm vụ đã hoàn thành</h3>
     {% for mission_completed in missions_completed %}
       <p>Tên nhiệm vụ: {{mission_completed.mission.mission_name}}</p>
       <p>Ảnh nhiệm vụ: </p>
-      <img src="data:image/jpg;base64,{{mission_completed.image}}" alt="not found">
+      <div style="width:200px; height:200px">
+        <img src="data:image/jpg;base64,{{mission_completed.image}}" alt="not found" style="width: 100%; height:100%">
+      </div>
 
-      <p>Caption:{mission_completed.caption}} </p>
+      <p>Caption:{{mission_completed.caption}} </p>
       <br>
       <hr>
     {% endfor%}
