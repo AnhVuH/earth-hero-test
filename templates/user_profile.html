@@ -7,7 +7,10 @@
   <body>
     <h2>{{username}}</h2>
     <a href="{{url_for("logout")}}">Đăng xuất</a>
+    {% if num_missions_uncompleted > 0 %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
+    {% else %}
+    <a href="{{url_for("")}}">Lưu lại 7 nhiệm vụ đã thực hiện</a>
 
     <h3>Danh sách nhiệm vụ đã hoàn thành</h3>
     {% for mission_completed in missions_completed %}

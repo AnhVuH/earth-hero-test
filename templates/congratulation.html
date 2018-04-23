@@ -5,7 +5,30 @@
     <title>Chúc mừng hoàn thành nhiệm vụ</title>
   </head>
   <body>
-    Bạn đã hoàn thành 7 nhiệm vụ
+    <h2>Bạn đã hoàn thành 7 nhiệm vụ</h2>
+    <br>
     <a href="{{url_for("continue_challenge")}}">Bạn có muốn tiếp tục cùng chúng tôi giải cứu trái đất</a>
+    <br>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+      <!-- Facebook -->
+        <div class="fb-share-button" data-href="http://localhost:5000/share/id"
+        data-layout="button_count"
+        data-size="large"
+        data-mobile-iframe="true">
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fearthhero.herokuapp.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a>
+      </div>
+
+
+
   </body>
 </html>

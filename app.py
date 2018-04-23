@@ -32,8 +32,15 @@ def sign_up():
         email = form['email']
         username = form['username']
         password = form['password']
-        new_user = User(email = email, username = username, password = password)
-        new_user.save()
+        try:
+            new_user = User(email = email, username = username, password = password)
+            new_user.save()
+        except:
+            # print(type(User.objects(email = email)))
+            if list(User.objects(email = email)) != []:
+                return "email đã được sử dụng"
+            elif list(User.objects(username = username)) != []:
+                return "username đã được sử dụng"
         session['user_id'] = str(new_user.id)
         missions = Missions.objects()
         for i in range(0,7):
@@ -64,8 +71,9 @@ def login():
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user = session['user_id'],completed= True)
+    num_missions_uncompleted = list(UserMission.objects(user = session['user_id'],completed= False)).count()
     username = (User.objects.with_id(session['user_id'])).username
-    return render_template("user_profile.html", missions_completed = missions_completed, username = username)
+    return render_template("user_profile.html", missions_completed = missions_completed, username = username,num_missions_uncompleted = num_missions_uncompleted)
 
 @app.route("/mission_detail")
 def mission_detail():
