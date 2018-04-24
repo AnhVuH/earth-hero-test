@@ -117,7 +117,7 @@ def finish():
 
 @app.route("/share/<id_mission>")
 def share(id_mission):
-    mission_share = UserMission.objects.with_id(id)
+    mission_share = UserMission.objects.with_id(id_mission)
     username = mission_share.user.username
     caption = mission_share.caption
     image = mission_share.image
