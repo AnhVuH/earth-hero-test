@@ -38,9 +38,9 @@ def sign_up():
         except:
             # print(type(User.objects(email = email)))
             if list(User.objects(email = email)) != []:
-                return "email đã được sử dụng"
+                return render_template("message.html", message = "email exist")
             elif list(User.objects(username = username)) != []:
-                return "username đã được sử dụng"
+                return render_template("message.html", message = "username exist")
         session['user_id'] = str(new_user.id)
         missions = Missions.objects()
         for i in range(0,7):
@@ -64,18 +64,18 @@ def login():
             session["user_id"] = str(user.id)
             return redirect(url_for("user_profile"))
         else:
-            return "error login"
+            return render_template("message.html", message = "error login")
 
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
     num_missions_uncompleted = len(list(UserMission.objects(user = session['user_id'],completed= False)))
-    # num_missions_not_saved = len(list(UserMission.objects(user=session['user_id'],completed= True, saved =False, not_save = True)))
-    # num_mission_saved = len(list(UserMission.objects(user=session['user_id'],completed= True, saved =True, not_save = False)))
+    num_missions_unprocessed = len(list(UserMission.objects(user = session['user_id'], not_save= None)))
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                num_missions_uncompleted = num_missions_uncompleted)
+                                                num_missions_uncompleted = num_missions_uncompleted,
+                                                num_missions_unprocessed = num_missions_unprocessed)
 
 @app.route("/mission_detail")
 def mission_detail():
@@ -113,19 +113,20 @@ def finish():
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True
-            return redirect(url_for("share",id = str(mission_updated.id)))
+            return redirect(url_for("share",id_mission = str(mission_updated.id)))
 
-@app.route("/share/<id>")
-def share(id):
+@app.route("/share/<id_mission>")
+def share(id_mission):
     mission_share = UserMission.objects.with_id(id)
     username = mission_share.user.username
     caption = mission_share.caption
     image = mission_share.image
-    return render_template("share.html",username = username, caption = caption, image = image, id= id)
+    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission)
 
 @app.route('/congratulation')
 def congratulation():
-    return render_template("congratulation.html")
+    user = User.objects.with_id(session["user_id"])
+    return render_template("congratulation.html",user = user)
 
 @app.route('/logout')
 def logout():
@@ -153,7 +154,7 @@ def save_album(save):
     save_missions = UserMission.objects(user =session['user_id'],completed = True, saved = False, not_save = False)
     user = User.objects.with_id(session['user_id'])
 
-    if save_missions != None:
+    if list(save_missions) != [] :
         new_album = Library(user = user,user_missions = save_missions)
         new_album.save()
         save_missions.update(set__saved=True)

@@ -9,9 +9,11 @@
     <a href="{{url_for("logout")}}">Đăng xuất</a>
     {% if num_missions_uncompleted > 0 %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
-    {% else %}
+    {% elif num_missions_unprocessed > 0 %}
     <a href="{{url_for("save_album",save = 1)}}">Lưu lại 7 nhiệm vụ đã thực hiện vào thư viện chung</a>
     <a href="{{url_for("save_album",save = 0)}}">Không lưu 7 nhiệm vụ đã thực hiện vào thư viện chung</a>
+    {% else %}
+    <a href="{{url_for("continue_challenge")}}">Đăng ký thêm nhiệm vụ</a>
     {% endif %}
 
     <h3>Danh sách nhiệm vụ đã hoàn thành</h3>

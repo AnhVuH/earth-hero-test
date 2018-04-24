@@ -5,6 +5,16 @@
     <title>Thông báo</title>
   </head>
   <body>
+    {% if message == "email exist"%}
+    <p>Email đã được sử dụng</p>
+    <a href="{{url_for("sign_up")}}">Đăng ký email khác</a>
+    {% elif message == "username exist"%}
+    <p>Username đã được sử dụng</p>
+    <a href="{{url_for("sign_up")}}">Đăng ký username khác</a>
+    {% elif message == "error login"%}
+    <p>Username hoặc password sai</p>
+    <a href="{{url_for("login")}}">Đăng nhập lại</a>
+    <a href="{{url_for("sign_up")}}">Đăng ký nếu bạn chưa có tài khoản</a>
 
   </body>
 </html>
