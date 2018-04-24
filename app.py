@@ -99,7 +99,7 @@ def finish():
         if not session['done']:
             return render_template('finish.html')
         else:
-            return "your image uploaded!!!"
+            return render_template("message.html", message = "uploaded")
     elif request.method == 'POST':
         form = request.form
         caption = form['caption']
@@ -114,6 +114,8 @@ def finish():
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True
             return redirect(url_for("share",id_mission = str(mission_updated.id)))
+        else:
+            return render_template("message.html", message = "file not allowed")
 
 @app.route("/share/<id_mission>")
 def share(id_mission):
@@ -128,11 +130,6 @@ def congratulation():
     user = User.objects.with_id(session["user_id"])
     return render_template("congratulation.html",user = user)
 
-@app.route('/logout')
-def logout():
-    if 'user_id' in session:
-        del session['user_id']
-        return redirect(url_for("index"))
 
 @app.route('/continue_challenge')
 def continue_challenge():
@@ -142,7 +139,7 @@ def continue_challenge():
         mission= choice(missions)
         new_user_mission = UserMission(user =user, mission =mission)
         new_user_mission.save()
-    return "continue challenge"
+    return render_template("message.html", message = "continue challenge")
 
 @app.route("/save_album/<int:save>")
 def save_album(save):
@@ -158,12 +155,18 @@ def save_album(save):
         new_album = Library(user = user,user_missions = save_missions)
         new_album.save()
         save_missions.update(set__saved=True)
-    return "your album saved"
+    return render_template("message.html", message = "processed")
 
 @app.route('/library')
 def library():
     all_albums = Library.objects()
     return render_template("library.html", all_albums= all_albums)
+
+@app.route('/logout')
+def logout():
+    if 'user_id' in session:
+        del session['user_id']
+        return redirect(url_for("index"))    
 
 
 if __name__ == '__main__':
