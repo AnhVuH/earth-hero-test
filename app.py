@@ -70,8 +70,12 @@ def login():
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
     num_missions_uncompleted = len(list(UserMission.objects(user = session['user_id'],completed= False)))
+    # num_missions_not_saved = len(list(UserMission.objects(user=session['user_id'],completed= True, saved =False, not_save = True)))
+    # num_mission_saved = len(list(UserMission.objects(user=session['user_id'],completed= True, saved =True, not_save = False)))
     username = (User.objects.with_id(session['user_id'])).username
-    return render_template("user_profile.html", missions_completed = missions_completed, username = username,num_missions_uncompleted = num_missions_uncompleted)
+    return render_template("user_profile.html", missions_completed = missions_completed,
+                                                username = username,
+                                                num_missions_uncompleted = num_missions_uncompleted)
 
 @app.route("/mission_detail")
 def mission_detail():
@@ -147,11 +151,12 @@ def save_album(save):
     elif save == 1:
         unsave_missions.update(set__not_save= False)
     save_missions = UserMission.objects(user =session['user_id'],completed = True, saved = False, not_save = False)
-
     user = User.objects.with_id(session['user_id'])
-    new_album = Library(user = user,user_missions = save_missions)
-    new_album.save()
-    save_missions.update(set__saved=True)
+
+    if save_missions != None:
+        new_album = Library(user = user,user_missions = save_missions)
+        new_album.save()
+        save_missions.update(set__saved=True)
     return "your album saved"
 
 @app.route('/library')
