@@ -105,36 +105,29 @@ def finish():
     elif request.method == 'POST':
         form = request.form
         caption = form['caption']
-        username = (User.objects.with_id(session["user_id"])).username
-        mission_id = str((UserMission.objects(user = session["user_id"], completed = False).first()).id)
-        name_image = username + mission_id
+        # username = (User.objects.with_id(session["user_id"])).username
+        # mission_id = str((UserMission.objects(user = session["user_id"], completed = False).first()).id)
+        # name_image = username + mission_id
 
 
         image = request.files['image']
         image_name = image.filename
-
-        im = Image.open(image)
-        im.save("static/media/"+name_image+".jpg", format = "JPEG", quality = 30)
-        image = Image.open("static/media/"+name_image+".jpg")
-
-        output = BytesIO()
-        image.save(output, format='JPEG')
-        image_data = output.getvalue()
-
-        # basewidth = 300
-        # img = Image.open(image)
-        # hpercent = (basewidth / float(img.size[1]))
-        # wsize = int((float(img.size[0]) * float(hpercent)))
-        # image = img.resize((basewidth, wsize), Image.ANTIALIAS)
-        #
-        #
-        # print(image)
-        # print(type(image))
-
-        image_bytes = base64.b64encode(image_data)
-        image_string = image_bytes.decode()
-
         if image  and allowed_filed(image_name):
+        # im = Image.open(image)
+        # im.save("static/media/"+name_image+".jpg", format = "JPEG", quality = 20)
+        # image = Image.open("static/media/"+name_image+".jpg")
+
+            img = Image.open(image)
+            output = BytesIO()
+            img.save(output, format='JPEG',quality = 20)
+            image_data = output.getvalue()
+
+
+
+            image_bytes = base64.b64encode(image_data)
+            image_string = image_bytes.decode()
+
+
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True

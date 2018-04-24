@@ -5,12 +5,13 @@
     <title>Thư viện các nhiệm vụ đã hoàn thành</title>
   </head>
   <body>
+    <a href="{{url_for("index")}}">Trở về trang chủ</a>
     {% for album in all_albums %}
       {{album.user.username}}
       {% for item in album.user_missions %}
         <p>{{item.mission.mission_name}}</p>
         <br>
-        <img src="data:image/jpg;base64,{{item.image}}" alt="not found">
+        <img src="data:image/jpg;base64,{{item.image}}" alt="not found" width="50%" height="30%">
         <br>
         <p>{{item.caption}}</p>
       {% endfor%}
