@@ -66,8 +66,7 @@ def login():
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
-    print
-    if (len(list(missions_completed)) % 7 != 0) or (len(list(missions_completed)) ==0):
+    if len(list(UserMission.objects(user = session['user_id'], completed=False))) !=0 :
         missions_uncompleted = True
         num_missions_unprocessed = 0
     else:
