@@ -2,29 +2,120 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vi Moi Truong</title>
+    <link rel="stylesheet" href="../static/css/home-page.css">
+    <link rel="stylesheet" href="../static/plugins/aos/aos.css">
+
+
+    <link rel="stylesheet" href="../static/css/lightgallery.min.css" />
+    <link rel="stylesheet" href="../static/css/lg-transitions.min.css" />
+    <link rel="stylesheet" href="../static/css/lg-fb-comment-box.min.css" />
+
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script src="../static/js/lightgallery.js"></script>
+
+    <!-- <script src="../static/js/lg-thumbnail.min.js"></script>
+    <script src="../static/js/lg-fullscreen.min.js"></script> -->
+
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $("#lightgallery").lightGallery();
+      });
+      </script>
+
   </head>
-  <body>
-    <h1>web của chúng tôi</h1>
-    {% if not loged_in %}
-      <a href = "{{url_for('login')}}">log in</a>
-      <a href = "{{url_for('sign_up')}}">sign up</a>
-    {%else%}
-      <a href="{{url_for('user_profile')}}">Trang cá nhân</a>
-    {% endif %}
-    <iframe src="https://www.youtube.com/embed/{{youtubeid}}"
-        width="100%"
-        height="360"
-        frameborder="0"
-        allow="autoplay;
-        encrypted-media" allowfullscreen></iframe></div>
-    <h2>content</h2>
-    <h3>lalala lololo</h3>
-    <img src="" style="width: 150px">
-    <img src="" style="width: 150px">
-    <img src="" style="width: 150px">
-    <img src="" style="width: 150px">
-    <br>
-    <a href ="{{url_for("library")}}">xem toàn bộ album</a><!--mọi người có thể đổi tên album-->
+<!-- hết phần head -->
+
+<div id="bg-img"class="">
+  <div id="header" class="d-flex pt-0">
+    <button type="button" class="btn btn-link justify-content-end pl-5"> <a class="btn-home" href="#">Earth Hero</a> </button>
+
+    <div id="navbar" class="d-flex justify-content-end">
+      {% if not loged_in %}
+      <button type="button" class="btn btn-link d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </button>
+      <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </button>
+      {% else %}
+      <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
+      <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </button>
+      {% endif %}
+    </div>
+  </div>
+  <div class="h-75 w-50 ml-5 pl-5 mt-5" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
+ <!-- 0000000000000000000000000 -->
+<script src="../static/plugins/aos/aos.js"></script>
+<script type="text/javascript">
+  AOS.init();</script>
+<!-- 0000000000000000000000000 -->
+ <p class="quote01 mb-3"><span class="main-co">Earth Hero</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
+<p class="quote01 mb-3">Khi đã tham gia vào mạng lưới của Earthhero, bạn sẽ chấp nhận những nhiệm vụ của một “người hùng” đến giải cứu trái đất.</p>
+
+<p class="quote01 mb-1">Nếu bạn yêu hành tinh này, vậy còn ngại ngần gì mà không tham gia với chúng tôi!</p>
+  </div>
+</div>
+<!-- xong phần header và ảnh  -->
+<div class="d-flex h-600px">
+<div class="d-flex w-830px h-600px ">
+  <div class=" ml-5 m-60px" data-aos="zoom-in" data-aos-duration="1300" data-aos-once="true">
+    <iframe style="box-shadow: 0px 10px 25px 0px #7f7f7f" width="780" height="500" src="https://www.youtube.com/embed/eRLJscAlk1M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+<div class=" h-600px d-flex justify-content-center">
+<div class="mx-5 my-5 px-5 py-5" data-aos="fade-left" data-aos-duration="1300">
+  <p class="quote01"><span class="btn-home">Earth Hero</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
+
+
+
+</div>
+</div>
+
+</div>
+<!-- xong phần video youtube  -->
+<!-- tới phần ảnh minh họa -->
+
+<div class="container mt-5 pt-5 mb-5">
+  <div class="h-200px">
+    <p id="album-quote" class="text-center" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true"> ❝ Hãy lắng nghe những câu chuyện <br> của những người hùng này ❞</p>
+<p class="text-center" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">__________________________________________________</p>
+  </div>
+  <div class="h-900px container">
+    <div id="lightgallery" class="d-flex justify-content-around flex-wrap">
+  <a class="card-pic" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""> </a>
+  <a class="card-pic" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""></a>
+  <a class="card-pic" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""></a>
+  <a class="card-pic" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""></a>
+  <a class="card-pic" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""></a>
+  <a class="card-pic0" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/photo/pexels-photo-754177.jpeg"><img style="width:100%;height:100%" src="../static/photo/pexels-photo-754177.jpeg" alt=""></a>
+
+
+
+
+
+
+    </div>
+    <div class="container d-flex justify-content-center mt-100px">
+      <button  type="button" class="btn btn-success btn-lg px-5 " name="" value="" style="border-radius:5px 5px 5px 5px"> <a style="color: white" href="{{url_for('library')}}">SEE MORE</a> </button>
+
+    </div>
+  </div>
+
+  </div>
+
+<div class="bg-dark mt-100px h-50px">
+
+</div>
+
   </body>
 </html>
