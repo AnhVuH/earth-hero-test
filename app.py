@@ -71,8 +71,10 @@ def login():
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
-    if len(list(missions_completed)) % 7 != 0:
+    print
+    if (len(list(missions_completed)) % 7 != 0) or (len(list(missions_completed)) ==0):
         missions_uncompleted = True
+        num_missions_unprocessed = 0
     else:
         missions_uncompleted = False
         num_missions_unprocessed = len(list(UserMission.objects(user = session['user_id'], not_save= None)))
@@ -91,7 +93,7 @@ def mission_detail():
     else:
         return redirect(url_for("congratulation"))
 
-ALLOWED_EXTENSIONS = set(['txt', 'jpg','png', 'jpeg', 'gif', 'pdf' ])
+ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg' ])
 def allowed_filed(filename):
     check_1 = "." in filename
     check_2 = filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -116,14 +118,15 @@ def finish():
         image = request.files['image']
         image_name = image.filename
         if image  and allowed_filed(image_name):
-        # im = Image.open(image)
-        # im.save("static/media/"+name_image+".jpg", format = "JPEG", quality = 20)
-        # image = Image.open("static/media/"+name_image+".jpg")
+            # im = Image.open(image)
+            # im.save("static/media/"+name_image+".jpg", format = "JPEG", quality = 20)
+            # image = Image.open("static/media/"+name_image+".jpg")
 
             img = Image.open(image)
-            img.save(format='JPEG',quality = 20)
+            if "png" in image_name:
+                img = img.convert('RGB')
             output = BytesIO()
-            img.save(output)
+            img.save(output,format='JPEG',quality = 20)
             image_data = output.getvalue()
 
 
