@@ -104,11 +104,9 @@ def finish():
         form = request.form
         caption = form['caption']
 
-
         image = request.files['image']
         image_name = image.filename
         if image  and allowed_filed(image_name):
-
 
             img = Image.open(image)
             if "png" in image_name:
@@ -128,7 +126,7 @@ def finish():
             if UserMission.objects(user = session["user_id"], completed = False).first() != None:
                 return redirect(url_for("share",id_mission = str(mission_updated.id)))
             else:
-                return redirect(url_for("congratulation")
+                return redirect(url_for("congratulation"))
         else:
             return render_template("message.html", message = "file not allowed")
 
