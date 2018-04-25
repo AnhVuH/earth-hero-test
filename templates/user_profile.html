@@ -9,7 +9,7 @@
     <a href="{{url_for("logout")}}">Đăng xuất</a>
     <br>
     <a href="{{url_for("index")}}">Trở lại trang chủ</a>
-    {% if num_missions_uncompleted > 0 %}
+    {% if missions_uncompleted %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
     {% elif num_missions_unprocessed > 0 %}
     <a href="{{url_for("save_album",save = 1)}}">Lưu lại 7 nhiệm vụ đã thực hiện vào thư viện chung</a>

@@ -71,12 +71,15 @@ def login():
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
-    num_missions_uncompleted = len(list(UserMission.objects(user = session['user_id'],completed= False)))
-    num_missions_unprocessed = len(list(UserMission.objects(user = session['user_id'], not_save= None)))
+    if len(list(missions_completed)) % 7 != 0:
+        missions_uncompleted = True
+    else:
+        missions_uncompleted = False
+        num_missions_unprocessed = len(list(UserMission.objects(user = session['user_id'], not_save= None)))
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                num_missions_uncompleted = num_missions_uncompleted,
+                                                missions_uncompleted = missions_uncompleted,
                                                 num_missions_unprocessed = num_missions_unprocessed)
 
 @app.route("/mission_detail")
@@ -118,10 +121,10 @@ def finish():
         # image = Image.open("static/media/"+name_image+".jpg")
 
             img = Image.open(image)
+            img.save(format='JPEG',quality = 20)
             output = BytesIO()
-            img.save(output, format='JPEG',quality = 20)
+            img.save(output)
             image_data = output.getvalue()
-
 
 
             image_bytes = base64.b64encode(image_data)
