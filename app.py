@@ -81,11 +81,10 @@ def user_profile():
 @app.route("/mission_detail")
 def mission_detail():
     mission_detail = (UserMission.objects(user = session['user_id'],completed= False)).first()
-    if mission_detail != None:
-        session['done'] = False
-        return render_template("mission_detail.html",mission_detail = mission_detail)
-    else:
-        return redirect(url_for("congratulation"))
+    session['done'] = False
+    return render_template("mission_detail.html",mission_detail = mission_detail)
+
+
 
 ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg' ])
 def allowed_filed(filename):
@@ -125,7 +124,11 @@ def finish():
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True
-            return redirect(url_for("share",id_mission = str(mission_updated.id)))
+
+            if UserMission.objects(user = session["user_id"], completed = False).first() != None:
+                return redirect(url_for("share",id_mission = str(mission_updated.id)))
+            else:
+                return redirect(url_for("congratulation")
         else:
             return render_template("message.html", message = "file not allowed")
 
