@@ -13,10 +13,6 @@ app = Flask(__name__)
 app.secret_key = 'a-useless-key'
 
 
-# for i in range(15):
-#     new_mission = Missions(missions_name="mission"+ str(i),description="abcxyz" + str(i))
-#     new_mission.save()
-
 @app.route('/')
 def index():
     if "user_id" in session:
@@ -38,7 +34,6 @@ def sign_up():
             new_user = User(email = email, username = username, password = password)
             new_user.save()
         except:
-            # print(type(User.objects(email = email)))
             if list(User.objects(email = email)) != []:
                 return render_template("message.html", message = "email exist")
             elif list(User.objects(username = username)) != []:
@@ -110,29 +105,23 @@ def finish():
     elif request.method == 'POST':
         form = request.form
         caption = form['caption']
-        # username = (User.objects.with_id(session["user_id"])).username
-        # mission_id = str((UserMission.objects(user = session["user_id"], completed = False).first()).id)
-        # name_image = username + mission_id
 
 
         image = request.files['image']
         image_name = image.filename
         if image  and allowed_filed(image_name):
-            # im = Image.open(image)
-            # im.save("static/media/"+name_image+".jpg", format = "JPEG", quality = 20)
-            # image = Image.open("static/media/"+name_image+".jpg")
+
 
             img = Image.open(image)
             if "png" in image_name:
                 img = img.convert('RGB')
             output = BytesIO()
+
             img.save(output,format='JPEG',quality = 20)
             image_data = output.getvalue()
 
-
             image_bytes = base64.b64encode(image_data)
             image_string = image_bytes.decode()
-
 
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
@@ -153,7 +142,6 @@ def share(id_mission):
 def congratulation():
     user = User.objects.with_id(session["user_id"])
     return render_template("congratulation.html",user = user)
-
 
 @app.route('/continue_challenge')
 def continue_challenge():
