@@ -9,6 +9,7 @@
     <a href="{{url_for("logout")}}">Đăng xuất</a>
     <br>
     <a href="{{url_for("index")}}">Trở lại trang chủ</a>
+    <br>
     {% if missions_uncompleted %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
     {% elif num_missions_unprocessed > 0 %}

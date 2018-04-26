@@ -5,7 +5,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Vi Moi Truong</title>
+
+    <title>Earth Hero</title>
+
     <link rel="stylesheet" href="../static/css/home-page.css">
     <link rel="stylesheet" href="../static/plugins/aos/aos.css">
 
@@ -49,6 +53,8 @@
       <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </button>
       {% else %}
       <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
+
+      <button type="button" class="btn btn-link "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </button>
 
       {% endif %}
     </div>
@@ -106,14 +112,14 @@
 
     </div>
     <div class="container d-flex justify-content-center mt-100px">
-      <button  type="button" class="btn btn-success btn-lg px-5 " name="" value="" style="border-radius:5px 5px 5px 5px"> <a style="color: white" href="{{url_for('library')}}">SEE MORE</a> </button>
+      <button  type="button" class="btn btn-success btn-lg px-4 " name="" value="" style="border-radius:5px 5px 5px 5px"> <a style="color: white" href="{{url_for('library')}}">SEE MORE</a> </button>
 
     </div>
   </div>
 
   </div>
 
-<div class="bg-dark mt-100px h-50px">
+<div class="bg-dark h-50px">
 
 </div>
 
