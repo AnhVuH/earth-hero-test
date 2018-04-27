@@ -12,6 +12,14 @@ mlab.connect()
 app = Flask(__name__)
 app.secret_key = 'a-useless-key'
 
+# def save_all_missions(user_id):
+#     user = User.objects.with_id(user_id)
+#     missions_share = UserMission.objects(user = user_id,completed = True, saved = False)
+#     new_album = Library(user = user ,user_missions = missions_share)
+#     new_album.save()
+#     missions_share.update(set__saved=True)
+
+
 @app.route('/')
 def index():
     if "user_id" in session:
@@ -65,14 +73,21 @@ def login():
 @app.route("/user_profile")
 def user_profile():
     missions_completed = UserMission.objects(user= session['user_id'],completed= True)
-    if len(list(UserMission.objects(user = session['user_id'], completed=False))) !=0 :
-        missions_uncompleted = True
+    missions_uncompleted =list(UserMission.objects(user = session['user_id'], completed=False))
+    if len(missions_uncompleted) != 0:
+        uncompleted = True
     else:
-        missions_uncompleted = False
+        uncompleted = False
+        # save_missions = UserMission.objects(user = session['user_id'],completed= True, saved = False)
+        # # if len(list(save_missions)) == 7:
+        # new_album = Library(user = session['user_id'],user_missions = save_missions)
+        # new_album.save()
+        # save_missions.update(set__saved=True)
+
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                missions_uncompleted = missions_uncompleted)
+                                                uncompleted = uncompleted)
 
 @app.route("/mission_detail")
 def mission_detail():
@@ -118,6 +133,13 @@ def finish():
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True
+            save_missions = UserMission.objects(user = session['user_id'],completed= True, saved = False)
+            if len(list(save_missions)) == 7:
+                session["all_missions_completed"] = True
+                print(session["all_missions_completed"])
+            else:
+                session["all_missions_completed"] = False
+                print(session["all_missions_completed"])
             return redirect(url_for("share",id_mission = str(mission_updated.id)))
         else:
             return render_template("message.html", message = "file not allowed")
@@ -129,13 +151,29 @@ def share(id_mission):
     caption = mission_share.caption
     image = mission_share.image
     mission_number = mission_share.mission_number
+    if session["all_missions_completed"]:
+        user = User.objects.with_id(session['user_id'])
+        missions_share = UserMission.objects(user = session['user_id'],completed = True, saved = False)
+        new_album = Library(user = user ,user_missions = missions_share)
+        new_album.save()
+        missions_share.update(set__saved=True)
+        # save_all_missions(session['user_id'])
+        session["all_completed"] = False
     return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number)
 
 @app.route('/congratulation')
 def congratulation():
     user = User.objects.with_id(session['user_id'])
     missions_share = UserMission.objects(user = session['user_id'],completed = True, saved = False)
-    return render_template("congratulation.html",missions_share = missions_share, user=user)
+    if len(list(missions_share)) == 7:
+        # new_album = Library(user = user ,user_missions = missions_share)
+        # new_album.save()
+        # missions_share.update(set__saved=True)
+        return render_template("congratulation.html",missions_share = missions_share, user=user)
+    else:
+        return "Bạn phải hoàn thành 7 nhiệm vụ đã"
+
+
 
 @app.route('/continue_challenge')
 def continue_challenge():
@@ -145,17 +183,8 @@ def continue_challenge():
         mission= choice(missions)
         new_user_mission = UserMission(user =user, mission =mission,mission_number = i+1)
         new_user_mission.save()
-    return render_template("message.html", message = "continue challenge")
+    return redirect(url_for("mission_detail"))
 
-@app.route("/save_album/<int:save>")
-def save_album(save):
-    save_missions = UserMission.objects(user =session['user_id'],completed = True, saved = False)
-    user = User.objects.with_id(session['user_id'])
-
-    new_album = Library(user = user,user_missions = save_missions)
-    new_album.save()
-    save_missions.update(set__saved=True)
-    return render_template("message.html", message = "processed")
 
 @app.route('/library')
 def library():

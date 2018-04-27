@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    {% if missions_uncompleted %}
+    {% if uncompleted %}
     <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
     {% else %}
     <a href="{{url_for("continue_challenge")}}">Đăng ký thêm nhiệm vụ</a>
