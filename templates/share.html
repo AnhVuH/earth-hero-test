@@ -14,9 +14,13 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
-    <h1>Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ"</h1>
-    <a href="{{url_for("user_profile")}}">Trở lại trang cá nhân</a>
+    <h1>Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ thứ {{mission_number}}</h1>
+    {% if mission_number < 7 %}
+      <a href="{{url_for("user_profile")}}">Trở lại trang cá nhân</a>
+    {% else%}
+      <a href="{{url_for("congratulation")}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
     <div class="">
+    {% endif %}
       {{ caption }}
     </div>
     <div style="width:200px; height:200px">
