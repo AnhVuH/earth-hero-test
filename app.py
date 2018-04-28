@@ -46,8 +46,6 @@ def sign_up():
                 return render_template("message.html", message = "email exist")
             elif list(User.objects(username = username)) != []:
                 return render_template("message.html", message = "username exist")
-        session['username'] = username
-        session['email'] = email
         wellcome_hero = """
         <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
 <h3>- Ch&agrave;o mừng {{username}} tham gia v&agrave;o nhiệm vụ giải cứu tr&aacute;i đất&nbsp;</h3>
@@ -105,6 +103,7 @@ def user_profile():
 
 @app.route("/mission_detail")
 def mission_detail():
+
     mission_detail = (UserMission.objects(user = session['user_id'],completed= False)).first()
     session['done'] = False
     return render_template("mission_detail.html",mission_detail = mission_detail)
@@ -151,15 +150,18 @@ def finish():
             if len(list(save_missions)) == 7:
                 session["all_missions_completed"] = True
                 print(session["all_missions_completed"])
+
+                username = User.objects.with_id(session['user_id']).username
+                email = User.objects.with_id(session['user_id']).email
                 missions_completed = """
                     <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
 <h3>- Mừng v&igrave; được gửi th&ocirc;ng điệp cho bạn 1 l&acirc;n nữa, {{username}} bạn đ&atilde; ho&agrave;n th&agrave;nh 7 nhiệm vụ tr&aacute;i đất ghi c&ocirc;ng bạn, h&atilde;y tiếp t&uacute;c g&oacute;p những h&agrave;nh động tươi đẹp cho m&ocirc;i trường nh&eacute;</h3>
 <h3>&nbsp;&nbsp;</h3>
 <h3>Heroku.com hận hạnh t&agrave;i trợ trang web n&agrave;y .</h3>
                 """
-                missions_completed.replace("{{username}}", session['username'])
+                missions_completed.replace("{{username}}", username)
                 gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
-                msg = Message("Gửi người anh hùng", to= session['email'], html = missions_completed)
+                msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
                 gmail.send(msg)
 
 
