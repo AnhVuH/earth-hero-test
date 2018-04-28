@@ -4,6 +4,7 @@ from random import choice
 import base64
 import os
 import gmail
+from gmail import GMail, Message
 from io import BytesIO
 from  werkzeug.utils import secure_filename
 from models.classes import *
@@ -45,6 +46,18 @@ def sign_up():
                 return render_template("message.html", message = "email exist")
             elif list(User.objects(username = username)) != []:
                 return render_template("message.html", message = "username exist")
+        session['username'] = username
+        wellcome_hero = """
+        <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
+<h3>- Ch&agrave;o mừng {{username}} tham gia v&agrave;o nhiệm vụ giải cứu tr&aacute;i đất&nbsp;</h3>
+<p><strong>- H&atilde;y truy cập https://earth-hero-test.herokuapp.com/&nbsp;để bắt đầu cuộc h&agrave;nh tr&igrave;nh đi n&agrave;o !!</strong></p>
+<p><img src="https://html-online.com/editor/tinymce4_6_5/plugins/emoticons/img/smiley-laughing.gif" alt="laughing" width="36" height="36" /></p>
+            """
+        wellcome_hero = wellcome_hero.replace("{{username}}", username)
+        gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
+        msg = Message("Gửi người anh hùng", to= email, html = wellcome_hero)
+        gmail.send(msg)
+
         session['user_id'] = str(new_user.id)
         missions = Missions.objects()
         for i in range(0,7):
@@ -137,6 +150,18 @@ def finish():
             if len(list(save_missions)) == 7:
                 session["all_missions_completed"] = True
                 print(session["all_missions_completed"])
+                missions_completed = """
+                    <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
+<h3>- Mừng v&igrave; được gửi th&ocirc;ng điệp cho bạn 1 l&acirc;n nữa, {{username}} bạn đ&atilde; ho&agrave;n th&agrave;nh 7 nhiệm vụ tr&aacute;i đất ghi c&ocirc;ng bạn, h&atilde;y tiếp t&uacute;c g&oacute;p những h&agrave;nh động tươi đẹp cho m&ocirc;i trường nh&eacute;</h3>
+<h3>&nbsp;&nbsp;</h3>
+<h3>Heroku.com hận hạnh t&agrave;i trợ trang web n&agrave;y .</h3>
+                """
+                missions_completed.replace("{{username}}", session['username'])
+                gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
+                msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
+                gmail.send(msg)
+
+
             else:
                 session["all_missions_completed"] = False
                 print(session["all_missions_completed"])
