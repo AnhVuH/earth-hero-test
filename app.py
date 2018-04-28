@@ -47,6 +47,7 @@ def sign_up():
             elif list(User.objects(username = username)) != []:
                 return render_template("message.html", message = "username exist")
         session['username'] = username
+        session['email'] = email
         wellcome_hero = """
         <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
 <h3>- Ch&agrave;o mừng {{username}} tham gia v&agrave;o nhiệm vụ giải cứu tr&aacute;i đất&nbsp;</h3>
@@ -158,7 +159,7 @@ def finish():
                 """
                 missions_completed.replace("{{username}}", session['username'])
                 gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
-                msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
+                msg = Message("Gửi người anh hùng", to= session['email'], html = missions_completed)
                 gmail.send(msg)
 
 
