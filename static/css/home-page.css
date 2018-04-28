@@ -1,6 +1,10 @@
 #bg-img{
+<<<<<<< HEAD
   background-image: url("../photo/pexels-photo-305821.jpeg");
 
+=======
+  background-image: url("../photo/pexels-photo.jpeg");
+>>>>>>> b13f301d2e98e65fd45d2e2583cfbd9b9c9a70b6
   background-size: cover;
   width: 100%;
   height: 800px;
