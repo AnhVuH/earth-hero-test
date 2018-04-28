@@ -14,11 +14,13 @@ class User(Document):
 class UserMission(Document):
     user =  ReferenceField(User)
     mission = ReferenceField(Missions)
+    mission_number = IntField()
     completed = BooleanField(default = False)
     image = StringField()
     caption = StringField()
     saved = BooleanField(default = False)
-    not_save = BooleanField()
+
+
 
 
 class Library(Document):
