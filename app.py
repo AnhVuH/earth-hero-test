@@ -51,6 +51,7 @@ def sign_up():
         gmail.send(msg)
 
         session['user_id'] = str(new_user.id)
+        session['first_login'] = True
         missions = Missions.objects()
         for i in range(0,7):
             mission= choice(missions)
@@ -83,11 +84,12 @@ def user_profile():
         uncompleted = True
     else:
         uncompleted = False
-
+    if 'first_login' in session:
+        first_login = True
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                uncompleted = uncompleted)
+                                                uncompleted = uncompleted , first_login = first_login)
 
 @app.route("/mission_detail")
 def mission_detail():
@@ -116,6 +118,8 @@ def finish():
         caption = form['caption']
 
         image = request.files['image']
+        image_size_MB = len(image.read())/1048576
+        # print(image_size_MB)
         image_name = image.filename
         if image  and allowed_filed(image_name):
 
@@ -124,7 +128,16 @@ def finish():
                 img = img.convert('RGB')
             output = BytesIO()
 
-            img.save(output,format='JPEG',quality = 20)
+            if image_size_MB < 5:
+                img.save(output,format='JPEG',quality = 95)
+            else:
+                img.save(output,format ='JPEG', quality = 75)
+            # if image_size_MB < 5:
+            #     img.save("static/media/small.jpg",format='JPEG', quality = 95)
+            # else:
+            #     img.save("static/media/large1.jpg",format ='JPEG', quality =70)
+
+
             image_data = output.getvalue()
 
             image_bytes = base64.b64encode(image_data)
@@ -144,10 +157,8 @@ def finish():
                 session['new_album_id'] = str(new_album.id)
                 missions_share.update(set__saved=True)
 
-                # username = User.objects.with_id(session['user_id']).username
-                # email = User.objects.with_id(session['user_id']).email
+
                 username = user.username
-                # print(username)
                 email = user.email
                 missions_completed = """
                     <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
