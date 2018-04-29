@@ -99,7 +99,7 @@ def mission_detail():
 
 
 
-ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg' ])
+ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg','JPG' ])
 def allowed_filed(filename):
     check_1 = "." in filename
     check_2 = filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
