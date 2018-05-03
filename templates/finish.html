@@ -25,7 +25,7 @@
 <div id="bg-finish" class="">
   <!-- phan header  -->
 <div class="d-flex justify-content-between">
-  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="#">Earth Hero</a> </button>
+  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="{{url_for("index")}}">Earth Hero</a> </button>
   <button type="button" class="btn btn-link "> <a class=" btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
 </div>
 <!-- phan noi dung -->
@@ -42,19 +42,25 @@
   <form  method="post" enctype="multipart/form-data">
     <!-- <label>Caption</label> -->
 <div class="d-flex justify-content-center">
-  <textarea class="text01 d-flex justify-content-center mt-0 pt-0" type="text" name="caption" rows="3" cols="60" placeholder="Say something to the people !" value=""></textarea>
+  <textarea class="text01 d-flex justify-content-around mt-0 pt-0" type="text" name="caption" rows="4" cols="60" placeholder="Hãy đăng ảnh để hoàn thành nhiệm vụ.
+Chia sẻ cảm nhận với mọi người nào !" value=""></textarea>
+
 
 </div>
 
-<div class="ml-5 mt-3">
+<div class="ml-5 mt-3 d-flex pt-3">
   <div class="upload-btn-wrapper">
-    <button class="btn ">Upload A File</button>
-    <input type="file" name="image"  value= "" required>
+    <button class="btn mr-4"><input type="file" name="image" equired> </button>
+
   </div>
-      <br>
+
       <input  class="btn px-5" type="submit" value="Gửi">
+
 </div>
+
+
   </form>
+
 </div>
 </div>
 </div>
