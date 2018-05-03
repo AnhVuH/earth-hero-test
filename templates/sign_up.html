@@ -20,7 +20,10 @@
     <script type="text/javascript">
       AOS.init();</script>
     <!-- 0000000000000000000000000 -->
-<div id="bg-img" class="pt-3">
+<div id="bg-img" class="pt-5">
+
+
+
 <div class="pl-5">
   <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a>
 </div>
@@ -29,10 +32,11 @@
 <div class="container d-flex justify-content-end">
   <br> <br> <br>
 <div class="mt-3">
-  <center class="pb-3" data-aos="fade-up" data-aos-duration="1300"><b id="login-name">Sign up. Let’s be a hero!</b></center>
+  <center class="pb-3" data-aos="fade-up" data-aos-duration="1300"><b id="login-name">Sign up! Let’s be a hero!</b></center> <br>
   <div>
     <div class="" id="login" data-aos="fade-up" data-aos-duration="1300">
-      <form class="form-group" method="post">
+      <!-- bat dau form nay!!!!!! -->
+      <form class="form-group" method="post" onsubmit='return validate(this)'>
         <label class="user">Username</label>
         <!-- form cho username -->
         <div class="input-group">
@@ -42,15 +46,12 @@
           <input class="form-control" type="text" name="username" value="" placeholder="Enter your username" required>
         </div> <br>
         <!-- den phan gmail -->
-        <label class="user">Gmail</label>
-
         <label class="user">Email</label>
-
         <div class="input-group">
           <div class="input-group-prepend">
                     <div class="input-group-text"><i class="far fa-envelope"></i></div>
                   </div>
-          <input class="form-control" type="email" name="email" value="" placeholder="Enter your gmail" required>
+          <input class="form-control" type="email" name="email" value="" placeholder="Enter your gmail"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
         </div> <br>
                 <label class="user">Password</label>
 
@@ -59,29 +60,52 @@
           <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-lock"></i></div>
                   </div>
-          <input class="form-control" type="password" name="password" value="" placeholder="Enter your password" required>
+          <input id="password" class="form-control" type="password" name="password" value="" placeholder="Enter your password" pattern=".{6,}" title="Six or more characters" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-lock"></i></div>
                   </div>
-          <input class="form-control" type="password" name="confirm-password" value="" placeholder="Confirm your password" required>
+          <input class="form-control" type="password" name="t1" value="" placeholder="Confirm your password"
+          id="confirm_password" required >
         </div>
         <input type="checkbox" onclick="myFunction()" required>
 <span style="color: white">Agree with all <a href="#">terms of service</a> of us
 
 </span> <br>
-
         <br>
-
-
-
         <input type="submit" class="btn btn-success" name="" value="Sign-up" style="border-radius:5px 0px 0px 5px">
         <input type="reset" class="btn btn-danger" name="" value="Reset" style="border-radius:0px 5px 5px 0px">
 
       </form>
-
-
+<!-- check password -->
+<script type="text/javascript">
+var password = document.getElementById("password")
+, confirm_password = document.getElementById("confirm_password");
+function validatePassword(){
+if(password.value != confirm_password.value) {
+  confirm_password.setCustomValidity("Passwords Don't Match");
+} else {
+  confirm_password.setCustomValidity('');
+}
+}
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+<!-- het doan check password -->
+<!-- check box term -->
+<script type="text/javascript">
+function validate(form) {
+// Checking if at least one period button is selected. Or not.
+if (!document.form1.agree.checked) {
+// document.getElementById('my_msg').innerHTML="Agree to Terms & Conditions checkbox before submitting ";
+//  return false; }
+) {
+  confirm_password.setCustomValidity("Passwords Don't Match");
+} else {
+  confirm_password.setCustomValidity('');
+}
+</script>
 
     </div>
   </div>

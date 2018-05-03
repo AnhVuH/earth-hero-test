@@ -86,6 +86,8 @@ def user_profile():
         uncompleted = False
     if 'first_login' in session:
         first_login = True
+    else:
+        first_login = False
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
@@ -194,7 +196,6 @@ def congratulation():
         return render_template("congratulation.html",missions_share = missions_share, user=user)
     else:
         return "Error"
-
 
 
 @app.route('/continue_challenge')
