@@ -162,17 +162,17 @@ def finish():
 
                 username = user.username
                 email = user.email
-                missions_completed = """
-                    <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
-<h3>- Mừng v&igrave; được gửi th&ocirc;ng điệp cho bạn 1 l&acirc;n nữa, {{username}} bạn đ&atilde; ho&agrave;n th&agrave;nh 7 nhiệm vụ tr&aacute;i đất ghi c&ocirc;ng bạn, h&atilde;y tiếp t&uacute;c g&oacute;p những h&agrave;nh động tươi đẹp cho m&ocirc;i trường nh&eacute;</h3>
-<h3>&nbsp;&nbsp;</h3>
-<h3>Heroku.com hận hạnh t&agrave;i trợ trang web n&agrave;y .</h3>
-                """
-                missions_completed = missions_completed.replace("{{username}}", username)
-                print("missions_completed")
-                gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
-                msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
-                gmail.send(msg)
+#                 missions_completed = """
+#                     <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
+# <h3>- Mừng v&igrave; được gửi th&ocirc;ng điệp cho bạn 1 l&acirc;n nữa, {{username}} bạn đ&atilde; ho&agrave;n th&agrave;nh 7 nhiệm vụ tr&aacute;i đất ghi c&ocirc;ng bạn, h&atilde;y tiếp t&uacute;c g&oacute;p những h&agrave;nh động tươi đẹp cho m&ocirc;i trường nh&eacute;</h3>
+# <h3>&nbsp;&nbsp;</h3>
+# <h3>Heroku.com hận hạnh t&agrave;i trợ trang web n&agrave;y .</h3>
+#                 """
+#                 missions_completed = missions_completed.replace("{{username}}", username)
+#                 print("missions_completed")
+#                 gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
+#                 msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
+#                 gmail.send(msg)
 
             return redirect(url_for("share",id_mission = str(mission_updated.id)))
         else:
