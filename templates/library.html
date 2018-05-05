@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="../static/css/album.css">
+    <link rel="stylesheet" href="../static/css/library.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -15,7 +15,7 @@
 <!-- hết phần head -->
     <div id="bg-img"class="">
       <div id="header" class="d-flex">
-        <button type="button" class="btn justify-content-end pl-5"><p class="btn-home">Earth Hero</p></button>
+        <button type="button" class="btn justify-content-end pl-5"><a class="btn-home" href = "{{url_for('index')}}">Earth Hero</a></button>
 
         <div id="navbar" class="d-flex justify-content-end">
           {% if not loged_in %}
@@ -36,7 +36,7 @@
     <div class="d-flex flex-column align-items-center">
       {% for album in all_albums %}
   <!-- Phần hiển thị 1 album -->
-    <div class="w-50 d-flex flex-column align-items-center p-1 border border-success m-5">
+    <div class="w-60 d-flex flex-column align-items-center p-1 m-5">
       <!-- phần username -->
       <div class="d-flex justify-content-center py-2"> <h3>{{album.user.username}}</h3> </div>
       <!-- phần ảnh -->
@@ -46,9 +46,9 @@
           <!-- 1 ảnh đầu  -->
           {% if loop.index ==1 %}
           <div class="w-100 d-flex justify-content-between">
-            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
-            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success">
-              <p>{{item.mission.mission_name}}</p>
+            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+            <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center ">
+              <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
               <p>{{item.caption}}</p>
             </div>
           </div>
@@ -57,20 +57,20 @@
             <!-- 1 cặp ảnh  + caption cùng hàng -->
               {% if 3 < loop.index < 6 %}
               <div class="w-50 d-flex justify-content-around flex-wrap ">
-                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%"alt=""></div>
-                    <div class="w-50 h-300px border border-success" >
-                      <p>{{item.mission.mission_name}}</p>
+                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                    <div class="w-50 h-300px d-flex border border-success flex-column justify-content-around align-items-center text-center">
+                      <p class = "font-size-20px">{{item.mission.mission_name}}</p>
                       <p>{{item.caption}}</p>
                     </div>
               </div>
               <!-- 1 cặp ảnh  + caption cùng hàng -->
               {%else%}
               <div class="w-50 d-flex justify-content-around flex-wrap">
-                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success" >
-                      <p>{{item.mission.mission_name}}</p>
+                    <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center " >
+                      <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
                       <p>{{item.caption}}</p>
                     </div>
-                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
+                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
               </div>
               {%endif%}
 

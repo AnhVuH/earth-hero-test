@@ -5,8 +5,9 @@
   height: 800px;
   background-position: center;
 }
-#header{
-}
+
+
+
 .btn-color{
   color: #9b9b9b;
 }
@@ -63,8 +64,8 @@
   background-color: green;
 }
 
-.w-50 {
-  width: 50%;
+.w-60 {
+  width: 60%;
 }
 
 .w-40 {
@@ -78,4 +79,11 @@
 .image {
        max-width: 100%;
        display: flex;
+}
+.font-size-30px {
+  font-size: 30px;
+}
+
+.font-size-20px {
+  font-size: 20px;
 }

@@ -26,7 +26,7 @@
 <div id="bg-finish" class="">
   <!-- phan header  -->
 <div class="d-flex justify-content-between">
-  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="#">Earth Hero</a> </button>
+  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a> </button>
   <button type="button" class="btn btn-link "> <a class=" btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
 </div>
 <!-- phan noi dung -->
@@ -46,7 +46,7 @@
   <form  method="post" enctype="multipart/form-data">
     <div class="">
       <input type="file" name="image" id="file-4" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple="">
-      <label class="m-p-bot-0px" for="file-4"><span>Hãy chọn 1 file ảnh…</span></label>
+      <label class="m-p-bot-0px" for="file-4" required ><span>Hãy chọn 1 file ảnh…</span></label>
     </div>
     <!-- <label>Caption</label> -->
     <div class="ml-100">

@@ -78,6 +78,9 @@
   width: 40%;
 }
 
+.w-60 {
+  width: 60%;
+}
 
 .h-50px {
   height: 50px;
@@ -99,3 +102,5 @@
        max-width: 100%;
        display: flex;
 }
+
+.centered-and-cropped { object-fit: cover }

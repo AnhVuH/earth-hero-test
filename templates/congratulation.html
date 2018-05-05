@@ -18,13 +18,13 @@
   <body>
     <h2>Chúc mừng {{user.username}}.Bạn đã hoàn thành 7 nhiệm vụ</h2>
 
-    <div class="d-flex justify-content-center flex-wrap">
+    <div class="w-50 d-flex justify-content-center flex-wrap">
     {% for item in missions_share %}
         {% if loop.index ==1 %}
         <div class="w-100 d-flex justify-content-between">
-          <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
-          <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success">
-            <p>{{item.mission.mission_name}}</p>
+          <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+          <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center ">
+            <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
             <p>{{item.caption}}</p>
           </div>
         </div>
@@ -33,20 +33,20 @@
           <!-- 1 cặp ảnh  + caption cùng hàng -->
             {% if 3 < loop.index < 6 %}
             <div class="w-50 d-flex justify-content-around flex-wrap ">
-                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%"alt=""></div>
-                  <div class="w-50 h-300px border border-success" >
-                    <p>{{item.mission.mission_name}}</p>
+                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                  <div class="w-50 h-300px d-flex border border-success flex-column justify-content-around align-items-center text-center">
+                    <p class = "font-size-20px">{{item.mission.mission_name}}</p>
                     <p>{{item.caption}}</p>
                   </div>
             </div>
             <!-- 1 cặp ảnh  + caption cùng hàng -->
             {%else%}
             <div class="w-50 d-flex justify-content-around flex-wrap">
-                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success" >
-                    <p>{{item.mission.mission_name}}</p>
+                  <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center " >
+                    <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
                     <p>{{item.caption}}</p>
                   </div>
-                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
+                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
             </div>
             {%endif%}
 
