@@ -15,11 +15,16 @@
 <!-- hết phần head -->
     <div id="bg-img"class="">
       <div id="header" class="d-flex">
-        <button type="button" class="btn btn-link justify-content-end pl-5"><p class="btn-home">Earth Hero</p></button>
+        <button type="button" class="btn justify-content-end pl-5"><p class="btn-home">Earth Hero</p></button>
 
         <div id="navbar" class="d-flex justify-content-end">
-          <button type="button" class="btn btn-link d-flex justify-content-end"><p class="btn-color">Log in</p></button>
-          <button type="button" class="btn btn-link "> <p class="justify-content-end btn-color pr-5">Sign up</p> </button>
+          {% if not loged_in %}
+          <button type="button" class="btn d-flex justify-content-end"><a class="btn-color pr-5 mr-3" href = "{{url_for('login')}}">Log in</a> </button>
+          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </button>
+          {% else %}
+          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5 mr-3" href = "{{url_for('logout')}}">Log out</a> </button>
+          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </button>
+          {% endif %}
         </div>
       </div>
       <div class="h-75 w-50 ml-5 pl-5 mt-3">
@@ -28,40 +33,55 @@
     </div>
 
 <!-- phần hiển thị các album -->
-    <div class="">
+    <div class="d-flex flex-column align-items-center">
       {% for album in all_albums %}
   <!-- Phần hiển thị 1 album -->
-      <div class="">
-          <div class="">{{album.user.username}}</div>
+    <div class="w-50 d-flex flex-column align-items-center p-1 border border-success m-5">
+      <!-- phần username -->
+      <div class="d-flex justify-content-center py-2"> <h3>{{album.user.username}}</h3> </div>
+      <!-- phần ảnh -->
+      <div class="d-flex justify-content-center flex-wrap">
           {% for item in album.user_missions %}
-          {% if loop.index ==1 %}
+
           <!-- 1 ảnh đầu  -->
-          <div class="container d-flex justify-content-center mt-5">
-            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success"><img src="data:image/jpg;base64,{{item.image}}" height='300' alt=""></div>
+          {% if loop.index ==1 %}
+          <div class="w-100 d-flex justify-content-between">
+            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
             <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success">
               <p>{{item.mission.mission_name}}</p>
               <p>{{item.caption}}</p>
             </div>
           </div>
           {% else %}
-  <!-- 6 ảnh còn lại -->
-          <div class="container d-flex justify-content-around flex-wrap mt-5">
-            <!-- 1 cặp ảnh  + caption cùng hàng -->>
-            <div class="d-flex justify-content-around flex-wrap">
-                  <div class="w-25 h-300px d-flex justify-content-center align-items-center border border-success"><img src="data:image/jpg;base64,{{item.image}}" height='300' alt=""></div>
-                  <div class="w-25 h-300px d-flex justify-content-center align-items-center border border-success" >
-                    <p>{{item.mission.mission_name}}</p>
-                    <p>{{item.caption}}</p>
-                  </div>
-            </div>
-          </div>
-      <!-- Kết thúc div 1 album -->
+          <!-- 6 ảnh còn lại -->
+            <!-- 1 cặp ảnh  + caption cùng hàng -->
+              {% if 3 < loop.index < 6 %}
+              <div class="w-50 d-flex justify-content-around flex-wrap ">
+                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%"alt=""></div>
+                    <div class="w-50 h-300px border border-success" >
+                      <p>{{item.mission.mission_name}}</p>
+                      <p>{{item.caption}}</p>
+                    </div>
+              </div>
+              <!-- 1 cặp ảnh  + caption cùng hàng -->
+              {%else%}
+              <div class=" w-50 d-flex justify-content-around flex-wrap">
+                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success" >
+                      <p>{{item.mission.mission_name}}</p>
+                      <p>{{item.caption}}</p>
+                    </div>
+                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
+              </div>
+              {%endif%}
+
           {% endif %}
           {% endfor %}
+      <!-- Kết thúc phần ảnh của 1 album -->
+      </div>
+      <!-- Kết thúc div 1 album -->
       </div>
     <!-- Kết thúc div các album -->
       {% endfor %}
     </div>
-
   </body>
 </html>
