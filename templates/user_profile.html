@@ -47,7 +47,7 @@
 <div class="container d-flex justify-content-between flex-wrap mt-5 ">
   {% for mission_completed in missions_completed %}
   {% if loop.index %2 ==0 %}
-  <div class="w-40 h-400px text-center font-size-30px mt-5 "><img src="data:image/jpg;base64,{{mission_completed.image}}" height='400' alt=""></div>
+  <div class="w-40 h-400px text-center font-size-30px mt-5 "><img src="data:image/jpg;base64,{{mission_completed.image}}" height='300' width='450' alt=""></div>
   <div class="d-flex w-40 h-400px text-center font-size-30px mt-5 flex-column justify-content-center align-items-center">
       <h3>{{mission_completed.mission.mission_name}}</h3>
       <p>{{mission_completed.caption}}</p>
@@ -58,7 +58,7 @@
       <h3>{{mission_completed.mission.mission_name}}</h3>
       <p>{{mission_completed.caption}}</p>
   </div>
-  <div class="w-40 h-400px text-center font-size-30px mt-5"><img src="data:image/jpg;base64,{{mission_completed.image}}" height='400' alt=""></div>
+  <div class="w-40 h-400px text-center font-size-30px mt-5"><img src="data:image/jpg;base64,{{mission_completed.image}}"height='300' width='450' alt=""></div>
   {% endif %}
 
 {% endfor%}

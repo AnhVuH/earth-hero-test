@@ -3,20 +3,56 @@
   <head>
     <meta charset="utf-8">
     <title>Chúc mừng hoàn thành nhiệm vụ</title>
+    <link rel="stylesheet" href="./static/css/congratulation.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
   </head>
   <body>
     <h2>Chúc mừng {{user.username}}.Bạn đã hoàn thành 7 nhiệm vụ</h2>
-    <br>
+
+    <div class="d-flex justify-content-center flex-wrap">
     {% for item in missions_share %}
-      {{item.mission.mission_name}}
-      <br>
-      <div style="width:200px; height:200px">
-      <img src="data:image/jpg;base64,{{item.image}}" alt="not found" style="width: 100%; height:100%">
-      </div>
-      <br>
-      {{item.caption}}
-      <br>
+        {% if loop.index ==1 %}
+        <div class="w-100 d-flex justify-content-between">
+          <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
+          <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success">
+            <p>{{item.mission.mission_name}}</p>
+            <p>{{item.caption}}</p>
+          </div>
+        </div>
+        {% else %}
+        <!-- 6 ảnh còn lại -->
+          <!-- 1 cặp ảnh  + caption cùng hàng -->
+            {% if 3 < loop.index < 6 %}
+            <div class="w-50 d-flex justify-content-around flex-wrap ">
+                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%"alt=""></div>
+                  <div class="w-50 h-300px border border-success" >
+                    <p>{{item.mission.mission_name}}</p>
+                    <p>{{item.caption}}</p>
+                  </div>
+            </div>
+            <!-- 1 cặp ảnh  + caption cùng hàng -->
+            {%else%}
+            <div class="w-50 d-flex justify-content-around flex-wrap">
+                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success" >
+                    <p>{{item.mission.mission_name}}</p>
+                    <p>{{item.caption}}</p>
+                  </div>
+                  <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success  p-2"><img src="data:image/jpg;base64,{{item.image}}" height='90%' width = "90%" alt=""></div>
+            </div>
+            {%endif%}
+
+        {% endif %}
     {% endfor %}
+  </div>
 
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -29,10 +65,10 @@
 
 
       <!-- Facebook -->
-      <div class="fb-share-button"
-      data-href="https://earth-hero-test.herokuapp.com/congratulation"
+      <div class="fb-share-button btn-lg"
+      data-href="https://earth-hero-test.herokuapp.com/congratulation/{{album_share}}"
       data-layout="button_count" data-size="small" data-mobile-iframe="true">
-      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fearth-hero-test.herokuapp.com%2Fcongratulation&amp;src=sdkpreparse"
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fearth-hero-test.herokuapp.com%2Fcongratulation%2F{{album_share}}&amp;src=sdkpreparse"
        class="fb-xfbml-parse-ignore">Chia sẻ</a>
      </div>
 

@@ -2,36 +2,56 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Thông báo</title>
+    <title></title>
+    <link rel="stylesheet" href="../static/css/message.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+
   </head>
-  <body>
-    {% if message == "email exist"%}
-    <p>Email đã được sử dụng</p>
-    <a href="{{url_for("sign_up")}}">Đăng ký email khác</a>
+<!-- hết phần head -->
+<body>
+  <div id="bg-img"class="">
+    <div id="header" class="d-flex pt-0">
+      <button type="button" class="btn justify-content-end pl-5"> <a class="btn-home" href= "{{url_for("index")}}">Earth Hero</a> </button>
+      <!-- <div id="navbar" class="d-flex justify-content-end">
+        <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "#">Log out</a> </button>
+        <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "#">Trang cá nhân</a> </button>
+      </div> -->
+    </div>
+    <div id='rcorners1' class="d-flex mt-5 center ">
+          {% if message == "email exist"%}
+          <h3>Email đã được sử dụng</h3>
+          <a href="{{url_for("sign_up")}}">Đăng ký email khác</a>
 
-    {% elif message == "username exist"%}
-    <p>Username đã được sử dụng</p>
-    <a href="{{url_for("sign_up")}}">Đăng ký username khác</a>
+          {% elif message == "username exist"%}
+          <h3>Username đã được sử dụng<h3>
+          <a href="{{url_for("sign_up")}}">Đăng ký username khác</a>
 
-    {% elif message == "error login"%}
-    <p>Username hoặc password sai</p>
-    <a href="{{url_for("login")}}">Đăng nhập lại</a>
-    <a href="{{url_for("sign_up")}}">Đăng ký nếu bạn chưa có tài khoản</a>
+          {% elif message == "error login"%}
+          <h3>Username hoặc password sai<h3>
+          <a href="{{url_for("login")}}">Đăng nhập lại</a>
+          <a href="{{url_for("sign_up")}}">Đăng ký nếu bạn chưa có tài khoản</a>
 
-    {% elif message == "uploaded"%}
-    <p>Nhiệm vụ đã hoàn thành</p>
-    <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
+          {% elif message == "uploaded"%}
+          <h3>Nhiệm vụ đã hoàn thành<h3>
+          <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
 
-    {% elif message == "file not allowed"%}
-    <p>Định dạng ảnh không phù hợp</p>
-    <a href="{{url_for("finish")}}">Sử dụng ảnh khác</a>
+          {% elif message == "file not allowed"%}
+          <h3>Định dạng ảnh không phù hợp<h3>
+          <a href="{{url_for("finish")}}">Sử dụng ảnh khác</a>
 
-    {% elif message == "continue challenge"%}
-    <p>Nhiệm vụ mới đã được giao</p>
-    <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
+          {% elif message == "continue challenge"%}
+          <h3>Nhiệm vụ mới đã được giao<h3>
+          <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
+          {% endif %}
+    </div>
 
-
-    {% endif%}
-
-  </body>
+  </div>
+</body>
 </html>
