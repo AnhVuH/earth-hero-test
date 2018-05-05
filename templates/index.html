@@ -41,15 +41,15 @@
 
 <div id="bg-img"class="">
   <div id="header" class="d-flex pt-0">
-    <button type="button" class="btn justify-content-end pl-5"> <a class="btn-home" href="#">Earth Hero</a> </button>
+    <p class="btn justify-content-end pl-5"> <a class="btn-home" href="#">Earth Hero</a> </p>
 
     <div id="navbar" class="d-flex justify-content-end">
       {% if not loged_in %}
-      <button type="button" class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </button>
-      <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </button>
+      <p  class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </p>
+      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </p>
       {% else %}
-      <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
-      <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </button>
+      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
+      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
       {% endif %}
     </div>
   </div>
