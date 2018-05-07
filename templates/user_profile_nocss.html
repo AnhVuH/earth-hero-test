@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trang cá nhân</title>
+    <link rel="stylesheet" href="./static/css/user_profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <div id="bg-img"class="">
+      <div id="header" class="d-flex">
+        <button type="button" class="btn btn-link justify-content-end pl-5"><p class="btn-home"><a class='text-green' href="{{url_for("index")}}">Trở lại trang chủ</a></p></button>
+
+        <div id="navbar" class="d-flex justify-content-end">
+          <button type="button" class="btn btn-link d-flex justify-content-end"><p class="btn-color"><a class='text-green' href="{{url_for("logout")}}">Đăng xuất</a></p></button>
+        </div>
+      </div>
+      <div class="h-75 w-50 ml-5 pl-5 mt-3">
+     <p class="quote01 mb-3"><span class="btn-home"> Chào bạn, {{username}}.</span> Trái Đất này cần chúng ta. Mỗi chúng ta là một người anh hùng của Trái Đất </p>
+      </div>
+    </div>
+
+    {% if uncompleted %}
+    <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
+    {% else %}
+    <a href="{{url_for("continue_challenge")}}">Đăng ký thêm nhiệm vụ</a>
+    {% endif %}
+
+    <div class="container text-center font-size-40px text-green mt-5">Những chiến tích của bạn</div>
+
+    <div class="container d-flex justify-content-around flex-wrap mt-5 ">
+
+    {% for mission_completed in missions_completed %}
+      <p>Tên nhiệm vụ: {{mission_completed.mission.mission_name}}</p>
+      <div class="w-40 h-400px text-center font-size-30px mt-5 "><p>Ảnh nhiệm vụ: </p>
+      <div style="width:200px; height:200px">
+        <img src="data:image/jpg;base64,{{mission_completed.image}}" alt="not found" style="width: 100%; height:100%">
+      </div>
+      </div>
+      <div class="d-flex w-40 h-400px text-center font-size-30px mt-5 justify-content-center align-items-center">
+      <p>Caption:{{mission_completed.caption}} </p></div>
+
+      <br>
+      <hr>
+
+    {% endfor%}
+  </div>
+
+  </body>
+</html>

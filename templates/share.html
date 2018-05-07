@@ -3,31 +3,59 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="../static/css/share.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
 
-    <h1>Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ thứ {{mission_number}}</h1>
+    <div id="bg-img"class="container d-flex align-items-center justify-content-center ">
 
-    {% if mission_number < 7 %}
-      <a href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
-    {% else%}
-      <a href="{{url_for("congratulation")}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
-      <a href="{{url_for("user_profile")}}">Trở về trang cá nhân</a>
-    <div class="">
-    {% endif %}
-      {{ caption }}
+      <div id='rcorners1' class="container d-flex justify-content-center align-items-center">
+
+
+        <div  class=" h-300px w-25 "> <img src="data:image/jpg;base64,{{image}}" width='265' height='290' alt=""></div>
+        <div class="container d-flex h-300px w-75 justify-content-between flex-wrap ">
+          <div class="bg-gray h-50px w-100 text-center"><p class="font-size-30px text-white">Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ thứ {{mission_number}}</p></div>
+          <div id='rcorners2' class="text-center"><p class="font-size-30px text-white">  {{ caption }}</p></div>
+
+          <div>
+
+              {% if mission_number < 7 %}
+                <a class='text-white btn-link font-size-25px' href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
+              {% elif album_id != None %}
+                <a class='text-white btn-link font-size-25px' href="{{url_for("congratulation", album_share = album_id)}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
+                  <br>
+                <a class='text-white btn-link font-size-25px' href="{{url_for("user_profile")}}">Trở về trang cá nhân</a>
+              {% endif %}
+          </div>
+
+
+          <div class="fb-share-button" data-href="https://earth-hero-test.herokuapp.com/share/{{id_mission}}"
+          data-layout="button_count"
+          data-size="large"
+          data-mobile-iframe="true">
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fearth-hero-test.herokuapp.com%2Fshare%2F{{id_mission}}&amp;src=sdkpreparse"
+          class="fb-xfbml-parse-ignore">Chia sẻ</a>
+          </div>
+        </div>
+
+      
+      </div>
+
+
     </div>
-    <div style="width:200px; height:200px">
-      <img src="data:image/jpg;base64,{{image}}" alt="not found" style="width: 100%; height:100%">
-    </div>
+
+
+      </div>
 
 
       <div id="fb-root"></div>
@@ -39,24 +67,10 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
 
-
     <!-- Facebook -->
 
-      <div class="fb-share-button" data-href="https://earth-hero-test.herokuapp.com/share/{{id_mission}}"
-      data-layout="button_count"
-      data-size="large"
-      data-mobile-iframe="true">
-      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fearth-hero-test.herokuapp.com%2Fshare%2F{{id_mission}}&amp;src=sdkpreparse"
-      class="fb-xfbml-parse-ignore">Chia sẻ</a>
-      </div>
-<!--
-      <div class="fb-share-button" data-href="http://127.0.0.1:5000/share/{{id_mission}}"
-      data-layout="button_count"
-      data-size="large"
-      data-mobile-iframe="true">
-      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5000%2Fshare%2F{{id_mission}}&amp;src=sdkpreparse"
-      class="fb-xfbml-parse-ignore">Chia sẻ</a>
-      </div> -->
+
+
 
     </body>
   </html>

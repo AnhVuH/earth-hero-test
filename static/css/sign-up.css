@@ -15,9 +15,9 @@
 }
 
 #login-name{
-  font-size: 35px;
+  font-size: 50px;
   font-family: 'Playfair Display', serif;
-  /* border-bottom-style: ridge; */
+  border-bottom-style: ridge;
   color: black;
 }
 #login{
@@ -45,7 +45,7 @@
   /* font-size: 25px;
   font-weight: bold;
   color: #2f7250; */
-  font-size: 45px;
+  font-size: 40px;
   font-weight: bold;
   color: #296647;
   font-family: 'Playfair Display', serif;

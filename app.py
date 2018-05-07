@@ -13,13 +13,6 @@ mlab.connect()
 app = Flask(__name__)
 app.secret_key = 'a-useless-key'
 
-# def save_all_missions(user_id):
-#     user = User.objects.with_id(user_id)
-#     missions_share = UserMission.objects(user = user_id,completed = True, saved = False)
-#     new_album = Library(user = user ,user_missions = missions_share)
-#     new_album.save()
-#     missions_share.update(set__saved=True)
-
 
 @app.route('/')
 def index():
@@ -58,6 +51,7 @@ def sign_up():
         gmail.send(msg)
 
         session['user_id'] = str(new_user.id)
+        session['first_login'] = True
         missions = Missions.objects()
         for i in range(0,7):
             mission= choice(missions)
@@ -90,27 +84,24 @@ def user_profile():
         uncompleted = True
     else:
         uncompleted = False
-        # save_missions = UserMission.objects(user = session['user_id'],completed= True, saved = False)
-        # # if len(list(save_missions)) == 7:
-        # new_album = Library(user = session['user_id'],user_missions = save_missions)
-        # new_album.save()
-        # save_missions.update(set__saved=True)
-
+    if 'first_login' in session:
+        first_login = True
+    else:
+        first_login = False
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                uncompleted = uncompleted)
+                                                uncompleted = uncompleted , first_login = first_login)
 
 @app.route("/mission_detail")
 def mission_detail():
-
     mission_detail = (UserMission.objects(user = session['user_id'],completed= False)).first()
     session['done'] = False
     return render_template("mission_detail.html",mission_detail = mission_detail)
 
 
 
-ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg' ])
+ALLOWED_EXTENSIONS = set([ 'jpg','png', 'jpeg','JPG' ])
 def allowed_filed(filename):
     check_1 = "." in filename
     check_2 = filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -129,6 +120,8 @@ def finish():
         caption = form['caption']
 
         image = request.files['image']
+        image_size_MB = len(image.read())/1048576
+        # print(image_size_MB)
         image_name = image.filename
         if image  and allowed_filed(image_name):
 
@@ -137,7 +130,16 @@ def finish():
                 img = img.convert('RGB')
             output = BytesIO()
 
-            img.save(output,format='JPEG',quality = 20)
+            if image_size_MB < 5:
+                img.save(output,format='JPEG',quality = 95)
+            else:
+                img.save(output,format ='JPEG', quality = 75)
+            # if image_size_MB < 5:
+            #     img.save("static/media/small.jpg",format='JPEG', quality = 95)
+            # else:
+            #     img.save("static/media/large1.jpg",format ='JPEG', quality =70)
+
+
             image_data = output.getvalue()
 
             image_bytes = base64.b64encode(image_data)
@@ -164,26 +166,29 @@ def finish():
 
             save_missions = UserMission.objects(user = session['user_id'],completed= True, saved = False)
             if len(list(save_missions)) == 7:
-                session["all_missions_completed"] = True
-                print(session["all_missions_completed"])
 
-                username = User.objects.with_id(session['user_id']).username
-                email = User.objects.with_id(session['user_id']).email
+                user = User.objects.with_id(session['user_id'])
+                missions_share = UserMission.objects(user = session['user_id'],completed = True, saved = False)
+                new_album = Library(user = user ,user_missions = missions_share)
+                new_album.save()
+                session['new_album_id'] = str(new_album.id)
+                missions_share.update(set__saved=True)
+
+
+                username = user.username
+                email = user.email
                 missions_completed = """
                     <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
 <h3>- Mừng v&igrave; được gửi th&ocirc;ng điệp cho bạn 1 l&acirc;n nữa, {{username}} bạn đ&atilde; ho&agrave;n th&agrave;nh 7 nhiệm vụ tr&aacute;i đất ghi c&ocirc;ng bạn, h&atilde;y tiếp t&uacute;c g&oacute;p những h&agrave;nh động tươi đẹp cho m&ocirc;i trường nh&eacute;</h3>
 <h3>&nbsp;&nbsp;</h3>
 <h3>Heroku.com hận hạnh t&agrave;i trợ trang web n&agrave;y .</h3>
                 """
-                missions_completed.replace("{{username}}", username)
+                missions_completed = missions_completed.replace("{{username}}", username)
+                print("missions_completed")
                 gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
                 msg = Message("Gửi người anh hùng", to= email, html = missions_completed)
                 gmail.send(msg)
 
-
-            else:
-                session["all_missions_completed"] = False
-                print(session["all_missions_completed"])
             return redirect(url_for("share",id_mission = str(mission_updated.id)))
         else:
             return render_template("message.html", message = "file not allowed")
@@ -195,28 +200,20 @@ def share(id_mission):
     caption = mission_share.caption
     image = mission_share.image
     mission_number = mission_share.mission_number
-    if session["all_missions_completed"]:
-        user = User.objects.with_id(session['user_id'])
-        missions_share = UserMission.objects(user = session['user_id'],completed = True, saved = False)
-        new_album = Library(user = user ,user_missions = missions_share)
-        new_album.save()
-        missions_share.update(set__saved=True)
-        # save_all_missions(session['user_id'])
-        session["all_completed"] = False
-    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number)
+    album_id = None
+    if mission_number == 7:
+        album_id = session['new_album_id']
+    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id)
 
-@app.route('/congratulation')
-def congratulation():
-    user = User.objects.with_id(session['user_id'])
-    missions_share = UserMission.objects(user = session['user_id'],completed = True, saved = False)
-    if len(list(missions_share)) == 7:
-        # new_album = Library(user = user ,user_missions = missions_share)
-        # new_album.save()
-        # missions_share.update(set__saved=True)
-        return render_template("congratulation.html",missions_share = missions_share, user=user)
+@app.route('/congratulation/<album_share>')
+def congratulation(album_share):
+    if "new_album_id" in session:
+        user_new_album = Library.objects.with_id(album_share)
+        user = user_new_album.user
+        missions_share = user_new_album.user_missions
+        return render_template("congratulation.html",missions_share = missions_share, user=user, album_share= album_share )
     else:
-        return "Bạn phải hoàn thành 7 nhiệm vụ đã"
-
+        return "Error"
 
 
 @app.route('/continue_challenge')
@@ -238,7 +235,8 @@ def library():
 @app.route('/logout')
 def logout():
     if 'user_id' in session:
-        del session['user_id']
+        # del session['user_id']
+        session.clear()
         return redirect(url_for("index"))
 
 
