@@ -103,4 +103,4 @@
        display: flex;
 }
 
-.centered-and-cropped { object-fit: cover }
+.fit-image{ object-fit: scale-down;}

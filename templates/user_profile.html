@@ -21,57 +21,51 @@
     <button type="button" class="btn btn-link justify-content-end pl-5"><a class="btn-home" href="{{url_for("index")}}">Earth Hero</a></button>
 
     <div id="navbar" class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link d-flex justify-content-end"><p class="btn-color">Log out</p></button>
+      <button type="button" class="btn btn-link d-flex justify-content-end"><a class="btn-color" href="{{url_for("logout")}}">Log out</a></button>
     </div>
   </div>
   <div class="h-75 w-50 ml-5 pl-5 mt-3">
  <p class="quote01 mb-3"><span class="btn-home">Trái Đất này cần chúng ta</span> Mỗi chúng ta là một người anh hùng của Trái Đất </p>
   </div>
 </div>
-<div class=" d-flex flex-column  justify-content-center">
+
+
   <div class="d-flex flex-column  justify-content-center">
     <div class="d-flex flex-column  justify-content-center">
-      <div class="container d-flex justify-content-center align-items-center mt-5 ">
-        {% if uncompleted %}
-        <div class=" w-20 font-size-30px bg-gray text-center">
-          <a class = "text-white" href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
-        </div>
-        {% else %}
-        <div class=" w-20 font-size-30px bg-gray text-center">
-          <a class = "text-white" href="{{url_for("continue_challenge")}}">Đăng ký thêm nhiệm vụ</a>
-        </div>
-        {% endif %}
-
-      </div>
-      <div class=" text-center font-size-40px text-green mt-5">Những chiến tích của bạn</div>
+            <div class="container d-flex justify-content-center align-items-center mt-5 ">
+              {% if uncompleted %}
+              <div class=" w-20 font-size-30px bg-gray text-center">
+                <a class = "text-white" href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ hiện tại</a>
+              </div>
+              {% else %}
+              <div class=" w-20 font-size-30px bg-gray text-center">
+                <a class = "text-white" href="{{url_for("continue_challenge")}}">Đăng ký thêm nhiệm vụ</a>
+              </div>
+              {% endif %}
+            </div>
+            <div class=" text-center font-size-40px text-green mt-5">Những chiến tích của bạn</div>
     </div>
 
-    <div class="d-flex  justify-content-around">
-      <div class="w-60 d-flex  justify-content-around flex-wrap mt-5 ">
-        {% for mission_completed in missions_completed %}
-        {% if loop.index %2 ==0 %}
-        <div class="w-50 h-400px text-center font-size-30px mt-5 centered-and-cropped" style="background-image:url('data:image/jpg;base64,{{mission_completed.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
-        <div class="border border-success d-flex w-50 h-400px text-center font-size-30px mt-5 flex-column justify-content-center align-items-center">
-            <h3>{{mission_completed.mission.mission_name}}</h3>
-            <p>{{mission_completed.caption}}</p>
-        </div>
-        {% else %}
 
-        <div class="border border-success d-flex w-50 h-400px text-center font-size-30px mt-5 flex-column justify-content-center align-items-center">
-            <h3>{{mission_completed.mission.mission_name}}</h3>
-            <p>{{mission_completed.caption}}</p>
-        </div>
-        <div class="w-50 h-400px text-center font-size-30px mt-5 centered-and-cropped"  style="background-image:url('data:image/jpg;base64,{{mission_completed.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
-        {% endif %}
 
+    <div class="d-flex justify-content-around flex-wrap">
+      {% for mission_completed in missions_completed %}
+      <div class="card mb-3 w-25 m-3">
+        <img class="card-img-top fit-image h-400px px-1" src="data:image/jpg;base64,{{mission_completed.image}}" alt="Card image cap">
+        <div class="card-body flex-column">
+          <!-- <div class="w-100"  style="background-image:url('data:image/jpg;base64,{{mission_completed.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div> -->
+          <h5 class="card-title">{{mission_completed.mission.mission_name}}</h5>
+          <p class="card-text">{{mission_completed.caption}}</p>
+        </div>
+      </div>
       {% endfor%}
-      </div>
-
     </div>
+
+
 
   </div>
 
-</div>
+
 
 
 
