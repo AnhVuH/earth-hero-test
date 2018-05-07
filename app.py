@@ -146,6 +146,22 @@ def finish():
             mission_updated = UserMission.objects(user = session["user_id"], completed = False).first()
             mission_updated.update(set__caption = caption, set__image = image_string, completed = True)
             session['done'] = True
+            next_mission = UserMission.objects(user = session["user_id"], completed = False).first()
+            if next_mission != None:
+                notification = """
+                                <h2 style="text-align: center;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;____Gửi người anh h&ugrave;ng___</h2>
+                    <h4>{{username}}, nhiệm vụ hiện tại của bạn l&agrave; :</h4>
+                    <h4>- {{mission}}</h4>
+                    <h4>H&atilde;y ho&agrave;n th&agrave;nh n&oacute; :)))</h4>
+                    <h2 style="text-align: center;">&nbsp;</h2>
+                """
+                notification = notification.replace("{{username}}",next_mission.user.username).replace("{{mission}}",next_mission.mission.mission_name)
+
+                # user
+                gmail = GMail(username="20166635@student.hust.edu.vn",password="quy.dc20166635")
+                msg = Message("Gửi người anh hùng", to= next_mission.user.email, html = notification)
+                gmail.send(msg)
+
             save_missions = UserMission.objects(user = session['user_id'],completed= True, saved = False)
             if len(list(save_missions)) == 7:
                 session["all_missions_completed"] = True
