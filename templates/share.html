@@ -17,9 +17,18 @@
   </head>
   <body>
 
-    <div id="bg-img"class="container d-flex align-items-center justify-content-center ">
+    <div id="bg-img"class="flex-column container  justify-content-center ">
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-link pl-5"> <a class="btn-home font-size-30px" href="{{url_for('index')}}">Earth Hero</a> </button>
+        <div>
+          {% if is_user%}
+        <button type="button" class="btn btn-link pl-5"> <a class='btn-color pr-5 font-size-25px' href="{{url_for("user_profile")}}">Trở về trang cá nhân</a></button>
+        <button type="button" class="btn btn-link "> <a class=" btn-color pr-5 font-size-25px" href = "{{url_for('logout')}}">Log out</a> </button>
+        {%  endif %}
+      </div>
+      </div>
 
-      <div id='rcorners1' class="container d-flex justify-content-center align-items-center">
+      <div id='rcorners1' class="container d-flex justify-content-center align-items-center margin-90  ">
 
 
         <div  class=" h-300px w-25 "> <img src="data:image/jpg;base64,{{image}}" width='265' height='290' alt=""></div>
@@ -28,13 +37,13 @@
           <div id='rcorners2' class="text-center"><p class="font-size-30px text-white">  {{ caption }}</p></div>
 
           <div>
-
+              {% if is_user%}
               {% if mission_number < 7 %}
-                <a class='text-white btn-link font-size-25px' href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
+                <a class='text-white btn-link font-size-25px utag' href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
               {% elif album_id != None %}
-                <a class='text-white btn-link font-size-25px' href="{{url_for("congratulation", album_share = album_id)}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
+                <a class='text-white btn-link font-size-25px utag' href="{{url_for("congratulation", album_share_id = album_id)}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
                   <br>
-                <a class='text-white btn-link font-size-25px' href="{{url_for("user_profile")}}">Trở về trang cá nhân</a>
+              {% endif %}
               {% endif %}
           </div>
 
@@ -48,7 +57,7 @@
           </div>
         </div>
 
-      
+
       </div>
 
 

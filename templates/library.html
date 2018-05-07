@@ -1,87 +1,110 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>library</title>
+
     <link rel="stylesheet" href="../static/css/library.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../static/css/lightgallery.min.css" />
+    <link rel="stylesheet" href="../static/css/lg-transitions.min.css" />
+    <link rel="stylesheet" href="../static/css/lg-fb-comment-box.min.css" />
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+
+    <script src="../static/js/lightgallery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $("#lightgallery").lightGallery();
+      });
+      </script>
+
   </head>
 
   <body>
 <!-- hết phần head -->
     <div id="bg-img"class="">
-      <div id="header" class="d-flex">
-        <button type="button" class="btn justify-content-end pl-5"><a class="btn-home" href = "{{url_for('index')}}">Earth Hero</a></button>
+
+      <div id="header" class="d-flex pt-0">
+        <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a> </p>
 
         <div id="navbar" class="d-flex justify-content-end">
           {% if not loged_in %}
-          <button type="button" class="btn d-flex justify-content-end"><a class="btn-color pr-5 mr-3" href = "{{url_for('login')}}">Log in</a> </button>
-          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </button>
+          <p  class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </p>
+          <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </p>
           {% else %}
-          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5 mr-3" href = "{{url_for('logout')}}">Log out</a> </button>
-          <button type="button" class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </button>
+          <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
+          <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
           {% endif %}
         </div>
       </div>
+
       <div class="h-75 w-50 ml-5 pl-5 mt-3">
      <p class="quote01 mb-3"><span class="btn-home">Earth Hero Album</span> nơi những người hùng chia sẻ những câu chuyện nhỏ của họ. </p>
       </div>
     </div>
+<!-- tới phần hiển thị các ảnh của người dùng!!!     -->
 
-<!-- phần hiển thị các album -->
-    <div class="d-flex flex-column align-items-center">
-      {% for album in all_albums %}
-  <!-- Phần hiển thị 1 album -->
-    <div class="w-60 d-flex flex-column align-items-center p-1 m-5">
-      <!-- phần username -->
-      <div class="d-flex justify-content-center py-2"> <h3>{{album.user.username}}</h3> </div>
-      <!-- phần ảnh -->
-      <div class="d-flex justify-content-center flex-wrap">
-          {% for item in album.user_missions %}
+<div class="">
+  {% for album in all_albums %}
+<!-- Phần hiển thị 1 album -->
+<!-- tên ng dùng -->
+  <div class="d-flex justify-content-center py-2"> <h3>{{album.user.username}}</h3> </div>
+<!-- thanh hiển thị các ảnh   -->
 
-          <!-- 1 ảnh đầu  -->
-          {% if loop.index ==1 %}
-          <div class="w-100 d-flex justify-content-between">
-            <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
-            <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center ">
-              <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
-              <p>{{item.caption}}</p>
-            </div>
-          </div>
-          {% else %}
-          <!-- 6 ảnh còn lại -->
-            <!-- 1 cặp ảnh  + caption cùng hàng -->
-              {% if 3 < loop.index < 6 %}
-              <div class="w-50 d-flex justify-content-around flex-wrap ">
-                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
-                    <div class="w-50 h-300px d-flex border border-success flex-column justify-content-around align-items-center text-center">
-                      <p class = "font-size-20px">{{item.mission.mission_name}}</p>
-                      <p>{{item.caption}}</p>
-                    </div>
-              </div>
-              <!-- 1 cặp ảnh  + caption cùng hàng -->
-              {%else%}
-              <div class="w-50 d-flex justify-content-around flex-wrap">
-                    <div class="w-50 h-300px d-flex flex-column justify-content-around align-items-center border border-success text-center " >
-                      <p class = "font-size-20px" >{{item.mission.mission_name}}</p>
-                      <p>{{item.caption}}</p>
-                    </div>
-                    <div class="w-50 h-300px d-flex justify-content-center align-items-center border border-success p-2"  style="background-image:url('data:image/jpg;base64,{{item.image}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
-              </div>
-              {%endif%}
+<section class="p-5 bg-dark">
+<div class="d-flex justify-content-center">
+  <div  id ="lightgallery" class="slick-demo w-75 my-2">
+    {% for item in album.user_missions %}
+    <a data-sub-html="<h4>{{item.mission.mission_name}}</h4><p>{{item.caption}}</p>" class="px-3" href='data:image/jpg;base64,{{item.image}}'><img style="width:100%;height:100%" src='data:image/jpg;base64,{{item.image}}' alt=""></a>
+<
 
-          {% endif %}
-          {% endfor %}
-      <!-- Kết thúc phần ảnh của 1 album -->
-      </div>
-      <!-- Kết thúc div 1 album -->
-      </div>
-    <!-- Kết thúc div các album -->
-      {% endfor %}
-    </div>
+  <!-- <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a>
+  <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a>
+  <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a> -->
+
+    {% endfor %}
+  </div>
+</div>
+</section>
+
+<!-- đến đây là xong 1 thanh album của 1 người dùng -->
+<style media="screen">
+
+  img:hover {opacity: 0.7}
+  .btn-home:hover {color: #235b3f}
+  a:hover { text-decoration: none; color: #235b3f}
+
+</style>
+
+  <script>
+    $(document).ready(function(){
+      $('.slick-demo').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: true
+      });
+    });
+  </script>
+{% endfor %}
+</div>
   </body>
 </html>

@@ -12,7 +12,7 @@
   text-decoration: none !important;
 }
 .h-400px{
-  height: 500px;
+  height: 300px;
 }
 .mt-100px{
   margin-top: 70px;
@@ -38,4 +38,7 @@ p{
 a{
   font-size: 30px;
   text-align: center;
+}
+#xam {
+    color: blue;
 }

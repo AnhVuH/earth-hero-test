@@ -203,17 +203,25 @@ def share(id_mission):
     album_id = None
     if mission_number == 7:
         album_id = session['new_album_id']
-    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id)
 
-@app.route('/congratulation/<album_share>')
-def congratulation(album_share):
-    if "new_album_id" in session:
-        user_new_album = Library.objects.with_id(album_share)
+    if "user_id" in session:
+        if session['user_id'] == str(mission_share.user.id):
+            is_user = True
+    else:
+        is_user = False
+    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id, is_user =is_user)
+
+@app.route('/congratulation/<album_share_id>')
+def congratulation(album_share_id):
+        user_new_album = Library.objects.with_id(album_share_id)
         user = user_new_album.user
         missions_share = user_new_album.user_missions
-        return render_template("congratulation.html",missions_share = missions_share, user=user, album_share= album_share )
-    else:
-        return "Error"
+        if "user_id" in session:
+            if session['user_id'] == str(user.id):
+                is_user = True
+        else:
+            is_user = False
+        return render_template("congratulation.html",missions_share = missions_share, user=user, is_user= is_user)
 
 
 @app.route('/continue_challenge')

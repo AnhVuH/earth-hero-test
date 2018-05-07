@@ -14,8 +14,9 @@
   </head>
   <body>
 <div id="bg-img" class="">
-<div class="">
-  <button type="button" class="btn btn-link justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a> </button>
+<div class="d-flex justify-content-between">
+  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="{{url_for('index')}}" style="color: green;">Earth Hero</a> </button>
+  <button type="button" class="btn btn-link pl-5"> <a id="xam "class='btn-color pr-5 font-size-25px ' href="{{url_for("user_profile")}}" style="color: green;">Trở về trang cá nhân</a></button>
 </div>
 <div class="d-flex justify-content-center mt-100px h-400px">
 <div id="content0" class="">
@@ -23,32 +24,43 @@
 
   {% if message == "email exist"%}
   <p class ="text-white">Email đã được sử dụng</p>
-  <a href="{{url_for("sign_up")}}">Đăng ký email khác</a>
+  <div class="d-flex align-items-end justify-content-center">  <a href="{{url_for("sign_up")}}">Đăng ký email khác</a>
+
+  </div>
 
   {% elif message == "username exist"%}
   <p class ="text-white">Username đã được sử dụng</p>
+  <div class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("sign_up")}}">Đăng ký username khác</a>
-
+</div>
   {% elif message == "error login"%}
   <pclass ="text-white">Username hoặc password sai</p>
+    <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("login")}}">Đăng nhập lại</a>
+  <br>
   <a href="{{url_for("sign_up")}}">Đăng ký nếu bạn chưa có tài khoản</a>
+</div>
 
   {% elif message == "uploaded"%}
   <p>Nhiệm vụ đã hoàn thành</p>
+    <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
-
+</div>
   {% elif message == "file not allowed"%}
   <p class ="text-white">Định dạng ảnh không phù hợp</p>
+    <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("finish")}}">Sử dụng ảnh khác</a>
-
+</div>
   {% elif message == "continue challenge"%}
   <p class ="text-white">Nhiệm vụ mới đã được giao</p>
+    <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
-
+</div>
   {% elif message == "processed"%}
   <p class ="text-white">Đã xử lý xong album</p>
+    <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("user_profile")}}">Trở về trang cá nhân </a>
+</div>
 
 
   {% endif%}
