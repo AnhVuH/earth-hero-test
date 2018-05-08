@@ -84,14 +84,11 @@ def user_profile():
         uncompleted = True
     else:
         uncompleted = False
-    if 'first_login' in session:
-        first_login = True
-    else:
-        first_login = False
+
     username = (User.objects.with_id(session['user_id'])).username
     return render_template("user_profile.html", missions_completed = missions_completed,
                                                 username = username,
-                                                uncompleted = uncompleted , first_login = first_login)
+                                                uncompleted = uncompleted )
 
 @app.route("/mission_detail")
 def mission_detail():
@@ -207,6 +204,8 @@ def share(id_mission):
     if "user_id" in session:
         if session['user_id'] == str(mission_share.user.id):
             is_user = True
+        else:
+            is_user = False
     else:
         is_user = False
     return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id, is_user =is_user)
@@ -219,6 +218,8 @@ def congratulation(album_share_id):
         if "user_id" in session:
             if session['user_id'] == str(user.id):
                 is_user = True
+            else:
+                is_user = False
         else:
             is_user = False
         return render_template("congratulation.html",missions_share = missions_share, user=user, is_user= is_user)

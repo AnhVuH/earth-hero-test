@@ -66,6 +66,10 @@
   font-size: 40px;
 }
 
+.font-size-20px {
+  font-size: 20px;
+}
+
 .text-green {
   color:green;
 }
@@ -74,6 +78,10 @@
   width: 20%;
 }
 
+
+.w-30 {
+  width: 30%;
+}
 .w-40 {
   width: 40%;
 }

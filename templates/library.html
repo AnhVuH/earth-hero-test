@@ -63,12 +63,12 @@
 
 <div class="d-flex flex-column py-2" >
     {% for album in all_albums %}
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center my-3">
       <div class="d-flex justify-content-center"><h3>{{album.user.username}}</h3></div>
-        <div class="slick-demo w-75 my-2">
+        <div class="lazy w-75 my-2">
             {% for item in album.user_missions %}
               <div class="">
-                    <img src="data:image/jpg;base64,{{item.image}}" alt="sliderimg1" width="400px" height="300px">
+                    <img data-lazy ="data:image/jpg;base64,{{item.image}}"  width="400px" height="300px">
                     <div class="">
                       <h3 class = "font-size-20px">{{item.mission.mission_name}}</h3>
                       <p>{{item.caption}}</p>
@@ -81,7 +81,8 @@
 
     <script>
       $(document).ready(function(){
-        $('.slick-demo').slick({
+        $('.lazy').slick({
+          lazyLoad: 'ondemand',
           slidesToShow: 3,
           slidesToScroll: 1,
           dots: true,
