@@ -29,34 +29,26 @@
   <button type="button" class="btn btn-link "> <a class=" btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
 </div>
 <!-- phan noi dung -->
-<div class=" w-100 d-flex align-items-center" data-aos="zoom-in-down" data-aos-duration="1000" data-aos-anchor-placement="top-center" data-aos-once="true">
-<div id="finish_content" class=" h-700px w-100 mx-100">
-<div id="div01" class="">
-  <p class="text-center pb-0 mb-0">Nhiệm vụ  thứ {{mission_detail.mission_number}}</p>
-<p class="text-center pb-0 mb-0"> {{mission_detail.mission.mission_name}}  </p>
+<div class="w-100 d-flex align-items-center" data-aos="zoom-in-down" data-aos-duration="1000" data-aos-anchor-placement="top-center" data-aos-once="true">
+  <div id="finish_content" class="h-700px w-100 mx-100 d-flex flex-column align-items-center justify-content-around">
+      <div id="div01" class="">
+      <p class="text-center pb-0 mb-0">Nhiệm vụ  thứ {{mission_detail.mission_number}}</p>
+      <p class="text-center pb-0 mb-0"> {{mission_detail.mission.mission_name}}  </p>
+      <p class="text-center pt-0 mb-1">____________________________________</p>
+      </div>
+      <div class="mt-100px">
+          <div class="d-flex justify-content-center">
+                <div class="text01 d-flex justify-content-center mt-1 px-5 " style=",width: 100px;height:350px;white-space:pre-wrap;overflow:auto;">
+                  {{mission_detail.mission.description}}
+                </div>
+          </div>
 
-<p class="text-center pt-0 mt-0">____________________________________</p>
+          <div class="ml-5 mt-3 d-flex justify-content-center">
+          <button type="button" class="pr-5 font-size-25px"> <a  href="{{url_for("finish")}}">Hoàn thành nhiệm vụ</a> </button>
+          </div>
 
-
-</div>
-<div class="mt-100px">
-  <form  method="post">
-    <!-- <label>Caption</label> -->
-<div class="d-flex justify-content-center">
-<div class="text01 d-flex justify-content-center mt-0 px-5 " style=",width: 100px;height:350px;white-space:pre-wrap;overflow:auto;">
-  {{mission_detail.mission.description}}
-
-</div>
-
-</div>
-
-<div class="ml-5 mt-3 d-flex justify-content-center">
-<button type="button" class="pr-5 font-size-25px"> <a  href="{{url_for("finish")}}">Hoàn thành nhiệm vụ</a> </button>
-</div>
-  </form>
-</div>
-</div>
-</div>
+      </div>
+  </div>
 
 
 </div>
