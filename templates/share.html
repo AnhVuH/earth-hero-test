@@ -34,7 +34,7 @@
         <div  class=" h-300px w-25 "> <img src="data:image/jpg;base64,{{image}}" width='265' height='290' alt=""></div>
         <div class="container d-flex h-300px w-75 justify-content-between flex-wrap ">
           <div class="bg-gray h-50px w-100 text-center"><p class="font-size-30px text-white">Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ thứ {{mission_number}}</p></div>
-          <div id='rcorners2' class="text-center"><p class="font-size-30px text-white">  {{ caption }}</p></div>
+          <div id='rcorners2' class="text-center"><p class="font-size-30px text-white" style="height:100px; overflow:auto;">  {{ caption }}</p></div>
 
           <div>
               {% if is_user%}
