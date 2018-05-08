@@ -6,11 +6,13 @@
   background-size: cover;
   background-attachment: fixed;
 }
+
 .btn-home{
   font-size: 40px;
   font-weight: bold;
   color: #296647;
   font-family: 'Playfair Display', serif;
+  text-decoration: none !important;
 }
 .btn-color{
   color: #545454;

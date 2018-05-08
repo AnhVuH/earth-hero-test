@@ -11,9 +11,11 @@
   color: #9b9b9b;
 }
 .btn-home{
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bold;
-  color: #2f7250;
+  color: #296647;
+  font-family: 'Playfair Display', serif;
+  text-decoration: none !important;
 }
 #navbar{
   width: 1800px;

@@ -11,6 +11,7 @@
   font-weight: bold;
   color: #296647;
   font-family: 'Playfair Display', serif;
+  text-decoration: none !important;
 }
 .btn-color{
   color: #545454;
