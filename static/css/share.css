@@ -1,9 +1,14 @@
 #bg-img{
-  background-image: url("https://goo.gl/Um1zSN");
-  /* background-size: cover; */
+  background-image: url("https://lh3.googleusercontent.com/StVQWWkEBvva3dVvSZFNdDeT3rNbczQz6NCOXe0kWYm9tmgWC0Ie8fyGA_BgxJ587U5hpIg5P1jp3erxRu82tMEmZr4K8CNdYX-6VMYZhPESmJKDLL20gV8jLnRb1D3r7uV67TzTFiOl06IxifInlBukTaZxbH3lYZJuELrpOGZfntlBrG-STo6aik7D8XLeyS-c-Odw4OHWjsnuZslSpXNaDLF5aj70xrb2uuovjhZbgEpQ-mY1AqJww4GLmSNrXce-xyi0iVbeIfzq_sru9ASB6HkIay1g08cmbH3_zAouZE_s6lSYxK2fGmemXjeYGkKQgAtTpjGMfZakWw2Pa3SUdFVpLJNf92rT8sjnVmheSM39FbIzApjLOO4mD2hcd7DkQVY7_cWOYC6gIPeS4UQOOHMIFE1XBOJ0VC2AGouW1GwyMY-_H9TyDCf6MoOiprCoAh5pewVkfXy57VrMgIdj1CnW9ktI1ox3sqlB617CY263hlCML8p8KWyh3bUj6gGcOAZTywiqIyhLdAYsnvE_MqzojMyFSqd6Re_c_Hsb_MgYA4REgrPkWGoIGb24BPvypWz4yFGVndxt_VKBOlcvaAqjjiaMHPqufIkV-_nnVfoWNWBY0NYQCDkN2HQ90GMdvB-od06B045QOj7Rzb_ov__92_PC=w2160-h1440-no");
+  background-size: cover;
+/*
   width: 100%;
   height: 800px;
-  background-position-y: -575%;
+  background-position-y: -575%; */
+  height: 100%;
+  background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 #header{
 }
@@ -14,7 +19,7 @@
 .btn-home{
   font-size: 40px;
   font-weight: bold;
-  color: white;
+  color: #296647;
   font-family: 'Playfair Display', serif;
   text-decoration: none !important;
 }
@@ -24,137 +29,8 @@
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
 }
-
-.d-inline-block {
-  display: inline-block;
-}
-
-.m-5 {
-  margin: 5%
-}
-
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.h-400px {
-  height: 400px;
-}
-
-.w-100px {
-  width: 100px;
-}
-
-.h-300px {
-  height: 300px;
-}
-
-.bg-red {
-  background-color: red;
-}
-
-.bg-green {
-  background-color: green;
-}
-
-.bg-black {
-  background-color: black;
-}
-
-
-.text-center {
-  text-align: center;
-}
-
-.font-size-40px {
-  font-size: 40px;
-}
-
-.text-green {
-  color:green;
-}
-
-.w-20 {
-  width: 20%;
-}
-
-.w-40 {
-  width: 40%;
-}
-.h-50px {
-  height: 50px;
-}
-
-.font-size-30px {
-  font-size: 30px;
-}
-
-.font-size-25px {
-  font-size: 25px;
-}
-
-.h-100px {
-  height: 100px;
-}
-.w-100px{
-  width: 400px;
-}
-.h-50px {
-  height:50px;
-}
-
-.h-200px {
-  height: 200px;
-}
-
-.bg-gray {
-  background-color: gray;
-}
-
-.image {
-       max-width: 100%;
-       display: flex;
-}
-
-#rcorners1 {
-    /* border-radius: 10px; */
-
-    /* background-color: white; */
-    /* background-color: #d3d3d3; */
-    padding: 20px;
-    width: 100%;
-    height: 400px;
-}
-
-#rcorners2 {
-    border-radius: 25px;
-    border: 2px solid white;
-    padding: 20px;
-    width: 100%;
-    height: 150px;
-}
-
-.margin-90 {
-    margin-top: 90px;
-}
-
-.card-pic{
-  width: 400px;
-  height: 300px;
-  /* background-color: skyblue; */
-  /* background-size: cover; */
-  border-radius: 5px;
-  /* margin-top: 50px;
-  margin-bottom: 30px; */
-  border-color: white;
-  border-width: 10px;
-  border-style: solid;
-  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.4);
-}
-
-.h-750px{
-  height: 750px;
+.h-500px{
+  height: 500px
 }
 .bg-white{
   background-color: white;
@@ -163,11 +39,21 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 26px;
 }
+.congrat0{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  /* color: white; */
+  font-weight: bold;
+}
 a:hover {
   text-decoration: none !important;
 }
 .btn-home:hover {color: #235b3f}
 .btn-color:hover {color: #235b3f}
+.caption{
+  background-color: black;
+  opacity: 0.7;
+}
 
 
 /* mmm */

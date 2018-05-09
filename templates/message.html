@@ -34,32 +34,20 @@
   <a href="{{url_for("sign_up")}}">Đăng ký username khác</a>
 </div>
   {% elif message == "error login"%}
-  <pclass ="text-white">Username hoặc password sai</p>
+  <p class ="text-white">Username hoặc password sai</p>
     <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("login")}}">Đăng nhập lại</a>
-  <br>
-  <a href="{{url_for("sign_up")}}">Đăng ký nếu bạn chưa có tài khoản</a>
 </div>
 
   {% elif message == "uploaded"%}
-  <p>Nhiệm vụ đã hoàn thành</p>
+  <p class ="text-white">Nhiệm vụ đã hoàn thành</p>
     <div  class="d-flex align-items-end justify-content-center">
-  <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
+  <a href="{{url_for("mission_detail")}}">Nhận nhiệm vụ mới</a>
 </div>
   {% elif message == "file not allowed"%}
   <p class ="text-white">Định dạng ảnh không phù hợp</p>
     <div  class="d-flex align-items-end justify-content-center">
   <a href="{{url_for("finish")}}">Sử dụng ảnh khác</a>
-</div>
-  {% elif message == "continue challenge"%}
-  <p class ="text-white">Nhiệm vụ mới đã được giao</p>
-    <div  class="d-flex align-items-end justify-content-center">
-  <a href="{{url_for("user_profile")}}">Trở về trang cá nhân để nhận nhiệm vụ mới</a>
-</div>
-  {% elif message == "processed"%}
-  <p class ="text-white">Đã xử lý xong album</p>
-    <div  class="d-flex align-items-end justify-content-center">
-  <a href="{{url_for("user_profile")}}">Trở về trang cá nhân </a>
 </div>
 
 

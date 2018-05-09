@@ -207,6 +207,7 @@ def share(id_mission):
     username = mission_share.user.username
     caption = mission_share.caption
     image = mission_share.image
+    mission_name = mission_share.mission.mission_name
     mission_number = mission_share.mission_number
     album_id = None
     if mission_number == 7:
@@ -219,7 +220,7 @@ def share(id_mission):
             is_user = False
     else:
         is_user = False
-    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id, is_user =is_user)
+    return render_template("share.html",username = username, caption = caption, image = image, id_mission= id_mission, mission_number =mission_number, album_id =album_id, is_user =is_user, mission_name =mission_name)
 
 @app.route('/congratulation/<album_share_id>')
 def congratulation(album_share_id):
