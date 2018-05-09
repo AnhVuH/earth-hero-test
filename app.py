@@ -134,14 +134,18 @@ def finish():
                 img = img.convert('RGB')
             output = BytesIO()
 
+            if image_size_MB < 1:
+                img.save(output,format='JPEG')
             if image_size_MB < 5:
-                img.save(output,format='JPEG',quality = 95)
+                img.save(output,format='JPEG',quality = 50)
             else:
-                img.save(output,format ='JPEG', quality = 75)
-            # if image_size_MB < 5:
-            #     img.save("static/media/small.jpg",format='JPEG', quality = 95)
+                img.save(output,format ='JPEG', quality = 25)
+            # if image_size_MB < 1:
+            #     img.save("static/sample/small.jpg",format='JPEG')
+            # elif image_size_MB < 5:
+            #     img.save("static/sample/medium.jpg",format='JPEG', quality = 50)
             # else:
-            #     img.save("static/media/large1.jpg",format ='JPEG', quality =70)
+            #     img.save("static/sample/large1.jpg",format ='JPEG', quality =25)
 
 
             image_data = output.getvalue()
