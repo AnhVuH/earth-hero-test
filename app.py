@@ -244,7 +244,7 @@ def continue_challenge():
     while len(list_missions)<7:
         mission= choice(missions)
         if mission.mission_name not in list_missions:
-            new_user_mission = UserMission(user = new_user, mission = mission, mission_number = len(list_missions)+1)
+            new_user_mission = UserMission(user = user, mission = mission, mission_number = len(list_missions)+1)
             new_user_mission.save()
             list_missions.append(mission.mission_name)
     return redirect(url_for("mission_detail"))
