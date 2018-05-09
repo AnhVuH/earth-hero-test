@@ -8,7 +8,8 @@
 
 
 .btn-color{
-  color: #9b9b9b;
+  color: #545454;
+  font-size: 24px;
 }
 
 .btn-home{
@@ -88,4 +89,9 @@
 
 .font-size-20px {
   font-size: 20px;
+}
+.btn-home:hover {color: #235b3f}
+.btn-color:hover {color: #235b3f}
+a:hover {
+  text-decoration: none !important
 }

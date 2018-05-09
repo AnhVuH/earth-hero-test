@@ -64,16 +64,11 @@
       <div  id="lightgallery"  class="slick-demo w-75 my-2">
         {% for item in missions_share %}
 <a data-sub-html="<h4>{{item.mission.mission_name}}</h4><p>{{item.caption}}</p>" class="px-3" href='data:image/jpg;base64,{{item.image}}'><img style="width:100%;height:100%" src='data:image/jpg;base64,{{item.image}}' alt=""></a>
-<!-- đoạn này là nháp, chị có thể bỏ cmt 3 dòng dưới để xem thử! -->
-
-  <!-- <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a>
-  <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a>
-  <a data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>" class="d-flex justify-content-center" href="http://via.placeholder.com/300x200"><img src="http://via.placeholder.com/300x200" alt=""></a> -->
 
 {% endfor %}
       </div>
 
-      <div class="fb-share-button"
+      <div class="fb-share-button my-3"
       data-href="https://earth-heroes.herokuapp.com/congratulation"
       data-layout="button_count" data-size="large" data-mobile-iframe="true" >
       <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fearth-heroes.herokuapp.com%2Fcongratulation&amp;src=sdkpreparse"

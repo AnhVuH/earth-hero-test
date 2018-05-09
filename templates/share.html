@@ -17,51 +17,47 @@
   </head>
   <body>
 
-    <div id="bg-img"class="flex-column container  justify-content-center ">
+    <div id="bg-img">
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-link pl-5"> <a class="btn-home font-size-30px" href="{{url_for('index')}}">Earth Hero</a> </button>
+        <!-- <button type="button" class="btn btn-link pl-5"> <a class="btn-home font-size-30px" href="{{url_for('index')}}">Earth Hero</a> </button> -->
+        <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Heroes</a> </p>
         <div>
           {% if is_user%}
-        <button type="button" class="btn btn-link pl-5"> <a class='btn-color pr-5 font-size-25px' href="{{url_for("user_profile")}}">Trở về trang cá nhân</a></button>
-        <button type="button" class="btn btn-link "> <a class=" btn-color pr-5 font-size-25px" href = "{{url_for('logout')}}">Log out</a> </button>
+        <p  class="btn"> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
+        <p  class="btn"> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
+
         {%  endif %}
       </div>
       </div>
 
-      <div id='rcorners1' class="container d-flex justify-content-center align-items-center margin-90  ">
-
-
-        <div  class=" h-300px w-25 "> <img src="data:image/jpg;base64,{{image}}" width='265' height='290' alt=""></div>
-        <div class="container d-flex h-300px w-75 justify-content-between flex-wrap ">
-          <div class="bg-gray h-50px w-100 text-center"><p class="font-size-30px text-white">Chúc mừng {{username}}, Bạn đã hoàn thành nhiệm vụ thứ {{mission_number}}</p></div>
-          <div id='rcorners2' class="text-center"><p class="font-size-30px text-white" style="height:100px; overflow:auto;">  {{ caption }}</p></div>
-
-          <div>
-              {% if is_user%}
-              {% if mission_number < 7 %}
-                <a class='text-white btn-link font-size-25px utag' href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
-              {% elif album_id != None %}
-                <a class='text-white btn-link font-size-25px utag' href="{{url_for("congratulation", album_share_id = album_id)}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
-                  <br>
-              {% endif %}
-              {% endif %}
+      <div id='rcorners1' class="bg-white d-flex  margin-90 align-items-center ">
+          <div id="lightgallery" class="d-flex justify-content-start align-items-center ml-5 pl-5">
+        <a class="card-pic" data-sub-html="" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="data:image/jpg;base64,{{image}}"> <img style="width:100%;height:100%" src="data:image/jpg;base64,{{image}}" alt=""></a>
           </div>
-
-
-          <div class="fb-share-button" data-href="https://earth-heroes.herokuapp.com/share/{{id_mission}}"
-          data-layout="button_count"
-          data-size="large"
-          data-mobile-iframe="true">
-          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2earth-heroes.herokuapp.com%2Fshare%2F{{id_mission}}&amp;src=sdkpreparse"
-          class="fb-xfbml-parse-ignore">Chia sẻ</a>
-          </div>
-        </div>
-
+<div class=" h-75 w-100 ml-3 text-center">
+<p class="font-size-30px congrat">Chúc mừng {{username}} đã hoàn thành nhiệm vụ thứ {{mission_number}}</p>
+<p>__________________________________________________</p>
+<p class="font-size-30px" style="height:100px; overflow:auto;">  {{ caption }}</p>
+<div>
+    {% if is_user%}
+    {% if mission_number < 7 %}
+      <a class=' font-size-25px ' href="{{url_for("mission_detail")}}">Chi tiết nhiệm vụ tiếp theo</a>
+    {% elif album_id != None %}
+      <a class='font-size-25px' href="{{url_for("congratulation", album_share_id = album_id)}}">Share toàn bộ 7 nhiệm vụ đã thực hiện</a>
+        <br>
+    {% endif %}
+    {% endif %}
+</div>
+<div class="fb-share-button d-flex justify-content-end" data-href="https://earth-heroes.herokuapp.com/share/{{id_mission}}"
+data-layout="button_count"
+data-size="large"
+data-mobile-iframe="true">
+<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2earth-heroes.herokuapp.com%2Fshare%2F{{id_mission}}&amp;src=sdkpreparse"
+class="fb-xfbml-parse-ignore">Chia sẻ</a>
+</div>
+</div>
 
       </div>
-
-
-    </div>
 
 
       </div>

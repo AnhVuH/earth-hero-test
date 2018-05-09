@@ -8,6 +8,8 @@
     <title>Earth Heroes</title>
     <link rel="stylesheet" href="../static/css/home-page.css">
     <link rel="stylesheet" href="../static/plugins/aos/aos.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Yeseva+One" rel="stylesheet">
+
 
 
     <link rel="stylesheet" href="../static/css/lightgallery.min.css" />
@@ -41,15 +43,15 @@
 
 <div id="bg-img"class="">
   <div id="header" class="d-flex pt-0">
-    <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a> </p>
+    <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Heroes</a> </p>
 
     <div id="navbar" class="d-flex justify-content-end">
       {% if not loged_in %}
       <p  class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </p>
       <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </p>
       {% else %}
-      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
       <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
+      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
       {% endif %}
     </div>
   </div>
@@ -59,7 +61,7 @@
 <script type="text/javascript">
   AOS.init();</script>
 <!-- 0000000000000000000000000 -->
- <p class="quote01 mb-3"><span class="main-co">Earth Hero</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
+ <p class="quote01 mb-3"><span class="main-co">Earth Heroes</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
 <p class="quote01 mb-3">Khi đã tham gia vào mạng lưới của Earthhero, bạn sẽ chấp nhận những nhiệm vụ của một “người hùng” đến giải cứu trái đất.</p>
 
 <p class="quote01 mb-1">Nếu bạn yêu hành tinh này, vậy còn ngại ngần gì mà không tham gia với chúng tôi!</p>
@@ -74,7 +76,7 @@
 </div>
 <div class=" h-600px d-flex justify-content-center">
 <div class="mx-5 my-5 px-5 py-5" data-aos="fade-left" data-aos-duration="1300">
-  <p class="quote01"><span class="btn-home">Earth Hero</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
+  <p class="quote01"><span class="btn-home">Earth Heroes</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
 
 
 
@@ -86,18 +88,18 @@
 <!-- tới phần ảnh minh họa -->
 
 <div class="container mt-5 pt-5 mb-5">
-  <div class="h-200px">
-    <p id="album-quote" class="text-center" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true"> ❝ Hãy lắng nghe những câu chuyện <br> của những người hùng này ❞</p>
-<p class="text-center" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">__________________________________________________</p>
+  <div class="h-200px" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
+    <p id="album-quote" class="text-center"> ❝ Hãy lắng nghe những câu chuyện <br> của những người hùng này ❞</p>
+<p class="text-center" >__________________________________________________</p>
   </div>
   <div class="h-900px container">
     <div id="lightgallery" class="d-flex justify-content-around flex-wrap">
   <a class="card-pic" data-sub-html="<h4>Tham gia hoạt động ngoài trời</h4><p>Cắm trại ở Núi Hàm Lợn</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/Hàm Lợn.jpg"> <img style="width:100%;height:100%" src="../static/sample/Hàm Lợn.jpg" alt=""></a>
-  <a class="card-pic" data-sub-html="<h4>Không sử dụng đũa, thìa, hộp nhựa, xốp... dùng 1 lần</h4><p>Dùng bộ thìa đũa du lịch để thay thế sản phẩm dùng 1 lần</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/_IMG9904-min.JPG"><img style="width:100%;height:100%" src="../static/sample/_IMG9904-min.JPG" alt=""></a>
-  <a class="card-pic" data-sub-html="<h4>Đi bộ, hoặc đi xe đạp</h4><p>Đạp xe xuống bãi giữa Sông Hồng</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/000050-1-min.JPG"><img style="width:100%;height:100%" src="../static/sample/000050-1-min.JPG" alt=""></a>
   <a class="card-pic" data-sub-html="<h4>Phân loại rác thải từ nguồn</h4><p></p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/DSC_0054.JPG"><img style="width:100%;height:100%" src="../static/sample/DSC_0054.JPG" alt=""></a>
-  <a class="card-pic" data-sub-html="<h4>Ăn chay 1 ngày</h4><p></p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/DSC_0049.JPG"><img style="width:100%;height:100%" src="../static/sample/DSC_0049.JPG" alt=""></a>
-  <a class="card-pic0" data-sub-html="<h4>Sử dụng các sản phẩm thân thiện với môi trường</h4><p>Bàn chải tre</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/_IMG9885-min.JPG"><img style="width:100%;height:100%" src="../static/sample/_IMG9885-min.JPG" alt=""></a>
+  <a class="card-pic" data-sub-html="<h4>Đi bộ, hoặc đi xe đạp</h4><p>Đạp xe xuống bãi giữa Sông Hồng</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/000050-1-min.JPG"><img style="width:100%;height:100%" src="../static/sample/000050-1-min.JPG" alt=""></a>
+  <a class="card-pic" data-sub-html="<h4>Tắt, rút hết ổ cắm điện khi không sử dụng</h4><p></p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/tắt điện.jpg"><img style="width:100%;height:100%" src="../static/sample/tắt điện.jpg" alt=""></a>
+  <a class="card-pic" data-sub-html="<h4>Ăn chay 1 ngày</h4><p></p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/ăn_chay.jpg"><img style="width:100%;height:100%" src="../static/sample/ăn_chay.jpg" alt=""></a>
+  <a class="card-pic0" data-sub-html="<h4>Tái chế 1 đồ cũ trong nhà</h4><p></p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="../static/sample/tai-che-5.jpg"><img style="width:100%;height:100%" src="../static/sample/tai-che-5.jpg" alt=""></a>
     </div>
 <style media="screen">
 
@@ -116,8 +118,8 @@
 
   </div>
 
-<div class="bg-dark mt-100px h-50px">
-
+<div class="d-flex align-items-center justify-content-center bg-dark mt-100px h-100px">
+<p class="text-center" style="color: white;font-size:25px">Được thực hiện bởi C4E16-Techkids</p>
 </div>
 
   </body>

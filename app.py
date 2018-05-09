@@ -42,7 +42,7 @@ def sign_up():
         wellcome_hero = """
         <h1 style="text-align: center;">.....Gửi người anh h&ugrave;ng......</h1>
 <h3>- Ch&agrave;o mừng {{username}} tham gia v&agrave;o nhiệm vụ giải cứu tr&aacute;i đất&nbsp;</h3>
-<p><strong>- H&atilde;y truy cập https://earth-hero-test.herokuapp.com/&nbsp;để bắt đầu cuộc h&agrave;nh tr&igrave;nh đi n&agrave;o !!</strong></p>
+<p><strong>- H&atilde;y truy cập https://earth-heroes.herokuapp.com/&nbsp;để bắt đầu cuộc h&agrave;nh tr&igrave;nh đi n&agrave;o !!</strong></p>
 <p><img src="https://html-online.com/editor/tinymce4_6_5/plugins/emoticons/img/smiley-laughing.gif" alt="laughing" width="36" height="36" /></p>
             """
         wellcome_hero = wellcome_hero.replace("{{username}}", username)
@@ -53,10 +53,17 @@ def sign_up():
         session['user_id'] = str(new_user.id)
         session['first_login'] = True
         missions = Missions.objects()
-        for i in range(0,7):
+        list_missions =[]
+        # for i in range(0,7):
+        #     mission= choice(missions)
+        #     new_user_mission = UserMission(user = new_user, mission = mission, mission_number = i+1)
+        #     new_user_mission.save()
+        while len(list_missions)<7:
             mission= choice(missions)
-            new_user_mission = UserMission(user = new_user, mission = mission, mission_number = i+1)
-            new_user_mission.save()
+            if mission.mission_name not in list_missions:
+                new_user_mission = UserMission(user = new_user, mission = mission, mission_number = len(list_missions)+1)
+                new_user_mission.save()
+                list_missions.append(mission.mission_name)
         return redirect(url_for("user_profile"))
 
 @app.route('/login', methods =['GET', 'POST'])
@@ -229,10 +236,17 @@ def congratulation(album_share_id):
 def continue_challenge():
     missions = Missions.objects()
     user = User.objects.with_id(session['user_id'])
-    for i in range(0,7):
+    # for i in range(0,7):
+    #     mission= choice(missions)
+    #     new_user_mission = UserMission(user =user, mission =mission,mission_number = i+1)
+    #     new_user_mission.save()
+    list_missions =[]
+    while len(list_missions)<7:
         mission= choice(missions)
-        new_user_mission = UserMission(user =user, mission =mission,mission_number = i+1)
-        new_user_mission.save()
+        if mission.mission_name not in list_missions:
+            new_user_mission = UserMission(user = new_user, mission = mission, mission_number = len(list_missions)+1)
+            new_user_mission.save()
+            list_missions.append(mission.mission_name)
     return redirect(url_for("mission_detail"))
 
 

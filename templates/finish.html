@@ -5,6 +5,7 @@
     <title>Finish</title>
 <link rel="stylesheet" href="../static/css/finish.css">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Yeseva+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <link rel="stylesheet" href="../static/plugins/aos/aos.css">
 
 
@@ -26,14 +27,14 @@
 <div id="bg-finish" class="">
   <!-- phan header  -->
 <div class="d-flex justify-content-between">
-  <button type="button" class="btn btn-link pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Hero</a> </button>
-  <button type="button" class="btn btn-link "> <a class=" btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </button>
+  <p class="pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Heroes</a> </p>
+  <p> <a class=" btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
 </div>
 <!-- phan noi dung -->
 <div class=" w-100 h-75 d-flex align-items-center" data-aos="zoom-in-down" data-aos-duration="1000" data-aos-anchor-placement="top-center" data-aos-once="true">
 <div id="finish_content" class=" h-700 w-100 mx-100">
 <div id="div01" class="">
-<p class="text-center pb-0 mb-0">Cảm ơn bạn vì đã trở thành một người hùng !  </p>
+<p class="text-center pb-0 mb-0">Hãy up ảnh để hoàn thành nhiệm vụ !</p>
 
 <p class="text-center pt-0 mt-0">____________________________________</p>
 <!-- <u class="text-center">Cảm ơn bạn đã trở thành một người hùng.</u> -->
@@ -46,7 +47,7 @@
   <form  method="post" enctype="multipart/form-data">
     <div class="">
       <input type="file" name="image" id="file-4" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple=""  required>
-      <label class="m-p-bot-0px" for="file-4" ><span>Hãy chọn 1 file ảnh…</span></label>
+      <label class="pl-0 m-p-bot-0px" for="file-4" ><span>Hãy chọn 1 file ảnh…</span></label>
     </div>
     <!-- <label>Caption</label> -->
     <div class="ml-100">
@@ -62,6 +63,8 @@ Chia sẻ cảm nhận với mọi người nào !" value=""></textarea>
 
 <div class="ml-5 mt-3 d-flex justify-content-center pt-3">
       <input  class="btn px-5" type="submit" value="Gửi">
+      <!-- <button  type="submit" class="btn btn-success btn-lg px-5" style="border-radius:5px 5px 5px 5px"> <a style="color: white" href="#">Gửi</a> </button> -->
+
 </div>
 
 

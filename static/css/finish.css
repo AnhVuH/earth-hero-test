@@ -48,8 +48,10 @@ textarea{
 }
 .text01{
   color: white;
-  font-size: 30px;
-  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  /* font-family: 'Playfair Display', serif; */
+  font-family: 'Montserrat', sans-serif;
+
 
 }
 .mt-100px{
@@ -166,7 +168,8 @@ textarea{
   padding-bottom: 0px;
 }
 
-
+.btn-home:hover {color: #235b3f}
+.btn-color:hover {color: #235b3f}
 
 
 
