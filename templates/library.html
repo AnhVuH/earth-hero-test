@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Library</title>
-    <link rel="stylesheet" href="../static/css/home-page.css">
+    <link rel="stylesheet" href="../static/css/library.css">
     <link rel="stylesheet" href="../static/plugins/aos/aos.css">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Yeseva+One" rel="stylesheet">
 
@@ -42,7 +42,7 @@
         a:hover { text-decoration: none; color: #235b3f}
 
       </style>
-
+<!--
       <style media="screen">
       .footer {
         position: absolute;
@@ -62,64 +62,65 @@
           height: 100%;
           box-sizing: border-box;
         }
-      </style>
+      </style> -->
   </head>
 <!-- hết phần head -->
-<body style=" ">
-  <div id="bg-img"class="">
-  <div id="header" class="d-flex pt-0">
-    <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Heroes</a> </p>
-
-    <div id="navbar" class="d-flex justify-content-end">
-      {% if not loged_in %}
-      <p  class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </p>
-      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </p>
-      {% else %}
-      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
-      <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
-      {% endif %}
-    </div>
-  </div>
-  <div class="h-75 w-50 ml-5 pl-5 mt-5" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
- <!-- 0000000000000000000000000 -->
-<script src="../static/plugins/aos/aos.js"></script>
-<script type="text/javascript">
-  AOS.init();</script>
-<!-- 0000000000000000000000000 -->
- <p class="quote01 mb-3"><span class="main-co">Earth Heroes</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
-<p class="quote01 mb-3">Khi đã tham gia vào mạng lưới của Earthhero, bạn sẽ chấp nhận những nhiệm vụ của một “người hùng” đến giải cứu trái đất.</p>
-
-<p class="quote01 mb-1">Nếu bạn yêu hành tinh này, vậy còn ngại ngần gì mà không tham gia với chúng tôi!</p>
-  </div>
-</div>
-<!-- xong phần header và ảnh  -->
+<body class = "">
+  <div class="">
 
 
-<!-- đây là phần ảnh của người dùng! -->
+            <div id="bg-img"class="">
+            <div id="header" class="d-flex pt-0">
+              <p class="btn justify-content-end pl-5"> <a class="btn-home" href="{{url_for('index')}}">Earth Heroes</a> </p>
 
-<div class="container mt-5 pt-5">
-  <div class="h-200px" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
-    <p id="album-quote" class="text-center"> ❝ Hãy lắng nghe những câu chuyện <br> của những người hùng này ❞</p>
-<p class="text-center" >__________________________________________________</p>
-  </div>
-  <div class="h-900px container">
-    <div id="lightgallery" class="d-flex justify-content-around flex-wrap">
-      {% for album in all_albums %}
-      {% for item in album.user_missions %}
+              <div id="navbar" class="d-flex justify-content-end">
+                {% if not loged_in %}
+                <p  class="btn d-flex justify-content-end"><a class="btn-color" href = "{{url_for('login')}}">Log in</a> </p>
+                <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('sign_up')}}">Sign up</a> </p>
+                {% else %}
+                <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('user_profile')}}">Trang cá nhân</a> </p>
+                <p  class="btn "> <a class="justify-content-end btn-color pr-5" href = "{{url_for('logout')}}">Log out</a> </p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="h-75 w-50 ml-5 pl-5 mt-5" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
+           <!-- 0000000000000000000000000 -->
+          <script src="../static/plugins/aos/aos.js"></script>
+          <script type="text/javascript">
+            AOS.init();</script>
+          <!-- 0000000000000000000000000 -->
+           <p class="quote01 mb-3"><span class="main-co">Earth Heroes</span> là một dự án nho nhỏ của chúng tôi, hy vọng qua đây có thể truyền tải thông điệp bảo vệ hành tinh xanh của chúng ta đến mọi người. </p>
+          <p class="quote01 mb-3">Khi đã tham gia vào mạng lưới của Earthhero, bạn sẽ chấp nhận những nhiệm vụ của một “người hùng” đến giải cứu trái đất.</p>
 
-  <a class="card-pic" data-sub-html="<h4>{{item.mission.mission_name}}</h4><p>{{item.caption}}</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="data:image/jpg;base64,{{item.image}}"> <img style="width:100%;height:100%" src="data:image/jpg;base64,{{item.image}}" alt=""></a>
-{% endfor %}
-{% endfor %}
+          <p class="quote01 mb-1">Nếu bạn yêu hành tinh này, vậy còn ngại ngần gì mà không tham gia với chúng tôi!</p>
+            </div>
+          </div>
+          <!-- xong phần header và ảnh  -->
 
-    </div>
 
-  </div>
+          <!-- đây là phần ảnh của người dùng! -->
 
-  </div>
+            <div class="container my-5 pt-5">
+              <div class="h-200px" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true">
+                <p id="album-quote" class="text-center"> ❝ Hãy lắng nghe những câu chuyện <br> của những người hùng này ❞</p>
+                <p class="text-center" >__________________________________________________</p>
+              </div>
+              <div class="container my-5">
+                <div id="lightgallery" class="d-flex justify-content-around flex-wrap">
+                  {% for album in all_albums %}
+                  {% for item in album.user_missions %}
 
-<div class="pt-4 footer bg-dark mt-100px h-100px" style="">
-<p class="text-center" style="color: white;font-size:25px">Được thực hiện bởi C4E16-Techkids</p>
+                   <a class="card-pic" data-sub-html="<p style ='font-size: 24px'>{{item.mission.mission_name}}</p><p style ='font-size: 16px'>{{item.caption}}</p>" data-aos="fade-up" data-aos-duration="1300" data-aos-anchor-placement="top-center" data-aos-once="true" href="data:image/jpg;base64,{{item.image}}"> <img style="width:280px;height:200px; object-fit: contain;" src="data:image/jpg;base64,{{item.image}}" alt=""></a>
+                  {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+              </div>
+
 </div>
 
+    <div class="pt-4 bg-dark mt-100px h-100px" >
+    <p class="text-center" style="color: white;font-size:25px">Được thực hiện bởi C4E16-Techkids</p>
+    </div>
   </body>
 </html>

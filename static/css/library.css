@@ -64,6 +64,7 @@
   border-width: 10px;
   border-style: solid;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.4);
+
 }
 .card-pic0{
   width: 300px;
@@ -96,5 +97,19 @@
 .btn-home:hover {
   text-decoration: none !important;
 }
+a:link {
+    text-decoration: none;
+}
 
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
 /* zzz */
