@@ -258,7 +258,11 @@ def continue_challenge():
 @app.route('/library')
 def library():
     all_albums = Library.objects()
-    return render_template("library.html", all_albums= all_albums)
+    if "user_id" in session:
+        loged_in = True
+    else:
+        loged_in = False
+    return render_template("library.html", all_albums= all_albums, loged_in= loged_in)
 
 @app.route('/logout')
 def logout():
