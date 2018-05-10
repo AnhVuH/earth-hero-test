@@ -1,5 +1,6 @@
 #bg-img{
-  background-image: url("https://lh3.googleusercontent.com/StVQWWkEBvva3dVvSZFNdDeT3rNbczQz6NCOXe0kWYm9tmgWC0Ie8fyGA_BgxJ587U5hpIg5P1jp3erxRu82tMEmZr4K8CNdYX-6VMYZhPESmJKDLL20gV8jLnRb1D3r7uV67TzTFiOl06IxifInlBukTaZxbH3lYZJuELrpOGZfntlBrG-STo6aik7D8XLeyS-c-Odw4OHWjsnuZslSpXNaDLF5aj70xrb2uuovjhZbgEpQ-mY1AqJww4GLmSNrXce-xyi0iVbeIfzq_sru9ASB6HkIay1g08cmbH3_zAouZE_s6lSYxK2fGmemXjeYGkKQgAtTpjGMfZakWw2Pa3SUdFVpLJNf92rT8sjnVmheSM39FbIzApjLOO4mD2hcd7DkQVY7_cWOYC6gIPeS4UQOOHMIFE1XBOJ0VC2AGouW1GwyMY-_H9TyDCf6MoOiprCoAh5pewVkfXy57VrMgIdj1CnW9ktI1ox3sqlB617CY263hlCML8p8KWyh3bUj6gGcOAZTywiqIyhLdAYsnvE_MqzojMyFSqd6Re_c_Hsb_MgYA4REgrPkWGoIGb24BPvypWz4yFGVndxt_VKBOlcvaAqjjiaMHPqufIkV-_nnVfoWNWBY0NYQCDkN2HQ90GMdvB-od06B045QOj7Rzb_ov__92_PC=w2160-h1440-no");
+  background-image:
+  url("https://lh3.googleusercontent.com/aZqKxf9X3bPe68Tn4O6dzQ7Gk0w8OygVJYsg7st0PtAXg8izmneYx5QN9EEde8jULJDdDUeTUQVx9lKnrpPbB2mDRB18kEcGJm1vvEl2KVk4JwKUdCpM7kvWeODhLzYZWnXdR_N1Q0WsCX0l2dQVEPOoSd1hBwjT6c_QK8ytB8eDfhCuR20fZqsIk5s0tCUftMaD2Gruj9C6P4grcqf9YPuQrvxnouK9lS6vt6EURFjXJsz4eKYvkA95uFCXDtEitCbcsTWIyjiMDU0dbmtnfidlNVASVYPzjkYmNAKw7W03Vvo2W15_D3NOo3vUkS29BFAdrrVNqCI8ebGVup_5BulbovBc7XIg2ce9ULcLmmnTyOnoBnA0Pq_YqG0htgF-a-iL4af2bwLek8cMStdFBfZ8qW2-0CmYrGV9q9YZT2vafUiPY6UKLrIk1gLqDs9eydKU-mflFJXGnf7ABfgkkBOpwHfyABEYpoanVkrXuwYKpmM0sqp6Fh5xkJbsepnW5aTqjfsfzGBnUQNQpChjdEsSRSt8RmYpzh6G7e6l92eaGNRPfWF994krWXUX4DXarHQwHzLymt3NoOfo2_cgQI-p5YIa1UOnuU2tc9ko_rI6OGMm-5uU7c0aq3V11KHGiJ6-oDQkIpNfHIbaiQxVxDQOWKzzVbBB=w994-h662-no");
   background-size: cover;
 /*
   width: 100%;
@@ -13,7 +14,7 @@
 #header{
 }
 .btn-color{
-  color: #d3d3d3;
+  color: #545454;
   font-size: 24px;
 }
 .btn-home{
@@ -23,7 +24,9 @@
   font-family: 'Playfair Display', serif;
   text-decoration: none !important;
 }
-
+.w-60{
+  width: 60%;
+}
 .quote01{
   color: #9b9b9b;
   font-size: 25px;
@@ -55,5 +58,17 @@ a:hover {
   opacity: 0.7;
 }
 
-
+.img-border{
+  background-color: white;
+  border-radius: 5px;
+  border-color: white;
+  border-width: 8px;
+  border-style: solid;
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.4);}
+.caption-border{
+  border-color: white;
+  border-width: 8px;
+  border-style: solid;
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.4);
+}
 /* mmm */
